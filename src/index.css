@@ -22,5 +22,5 @@ code {
 /* inpurt fields */
 
 input:focus {
-  border: 0px !important;
+  outline: none;
 }

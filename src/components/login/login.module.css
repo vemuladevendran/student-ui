@@ -1,10 +1,35 @@
-
 .login_input {
     width: 280px;
 }
 
-
 .login_container {
     background-color: #70b0ed;
     padding: 4rem 0;
+}
+
+/* loader */
+
+.loader {
+    display: inline-block;
+    background-color: blueviolet;
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 5px;
+    margin-left: 5px;
+    animation: roll 1s infinite;
+    transform: rotate(180deg);
+}
+
+.loader_wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+/* roating loader */
+@keyframes roll {
+    0% {
+        transform: rotate(0);
+    }
 }
