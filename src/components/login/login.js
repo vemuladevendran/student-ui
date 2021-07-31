@@ -43,12 +43,6 @@ export default class Login extends PureComponent {
                 showLoader: true,
             })
             const data = this.state.formValues;
-            if (TokenServe.isTokenExist() === true) {
-                this.setState({
-                    errorDetails: 'Session in Already Exist'
-                });
-                return;
-            }
             const result = await axios.post('http://localhost:3000/api/v1/login', data);
             //  save login token
             const token = result.data.token;
