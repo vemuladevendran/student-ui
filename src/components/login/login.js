@@ -4,12 +4,12 @@ import Loader from '../loader/loader';
 import axios from 'axios';
 import TokenServe from '../../service/token'
 
-
 export default function Login() {
 
     const [formValues, setFormValues] = useState({ email: '', password: '' });
     const [errorMessage, setErrorMessage] = useState('');
     const [loader, setLoaderStatus] = useState(false);
+
 
     // handle form value change
     const handleValueChange = async (event) => {
@@ -60,8 +60,6 @@ export default function Login() {
                     {
                         loader === true ? <Loader></Loader> : null
                     }
-
-
                     <div className="row">
                         <div className="col-6 d-none d-lg-block">
                             <img src="/assets/login-bg-2.jpg" alt="logo" className="w-100 h-100"></img>
@@ -73,13 +71,13 @@ export default function Login() {
                                 <div className="mt-5">
                                     <span className="input-wrapper bg-white py-3 px-3 rounded">
                                         <span><i className="bi bi-person-bounding-box me-1 text-warning"></i></span>
-                                        <input type="text" placeholder="Email" name="email" className={`${ss.login_input} border-0`} onChange={handleValueChange}></input>
+                                        <input type="email" placeholder="Email" name="email" className={`${ss.login_input} border-0`} onChange={handleValueChange} required></input>
                                     </span>
                                 </div>
                                 <div className="mt-5">
                                     <span className="input-wrapper bg-white py-3 px-3 rounded">
                                         <span><i className="bi bi-lock-fill me-1 text-warning"></i></span>
-                                        <input type="password" placeholder="Password" name="password" className={`${ss.login_input} border-0`} onChange={handleValueChange}></input>
+                                        <input type="password" placeholder="Password" name="password" className={`${ss.login_input} border-0`} onChange={handleValueChange} required></input>
                                     </span>
                                 </div>
 
