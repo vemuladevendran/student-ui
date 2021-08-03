@@ -62,44 +62,47 @@ export default function Login() {
                     }
                     <div className="row">
                         <div className="col-6 d-none d-lg-block">
-                            <img src="/assets/login-bg-2.jpg" alt="logo" className="w-100 h-100"></img>
+                            <img src="/assets/login-bg-2.jpg" alt="logo" className={`${ss.login_banner} w-100 h-100`}></img>
                         </div>
-                        <div className={`${ss.login_container} col-12 col-lg-6 rounded text-center`}>
-                            <h2 className="mt-2 text-white fw-bold">Login</h2>
-                            <form className="mt-5" onSubmit={handleSubmit}>
-                                {/* form unputs */}
-                                <div className="mt-5">
-                                    <span className="input-wrapper bg-white py-3 px-3 rounded">
-                                        <span><i className="bi bi-person-bounding-box me-1 text-warning"></i></span>
-                                        <input type="email" placeholder="Email" name="email" className={`${ss.login_input} border-0`} onChange={handleValueChange} required></input>
-                                    </span>
-                                </div>
-                                <div className="mt-5">
-                                    <span className="input-wrapper bg-white py-3 px-3 rounded">
-                                        <span><i className="bi bi-lock-fill me-1 text-warning"></i></span>
-                                        <input type="password" placeholder="Password" name="password" className={`${ss.login_input} border-0`} onChange={handleValueChange} required></input>
-                                    </span>
-                                </div>
-
-                                {/* error details */}
-
-                                <p className="text-danger mt-3 text-start fw-bold">{errorMessage}</p>
-
-                                {/* forget password */}
-                                <div className="mt-4 d-flex justify-content-center">
-                                    <div className="d-flex justify-content-between" style={{ width: "280px" }}>
-                                        <div className="text-white">
-                                            <input type="checkbox" className="me-2" id="remember"></input>
-                                            <label htmlFor="remember">Remember me</label>
-                                        </div>
-                                        <a className="text-white" href="/">Forget Password</a>
+                        <div className="col-12 col-lg-6 d-flex align-items-center">
+                            <div className={`${ss.login_container} text-center w-100`}>
+                                <h2 className="mt-2 text-white fw-bold">Login</h2>
+                                <form className="mt-5" onSubmit={handleSubmit}>
+                                    {/* form unputs */}
+                                    <div className="mt-5">
+                                        <span className="input-wrapper bg-white py-3 px-3 rounded">
+                                            <span><i className="bi bi-person-bounding-box me-1 text-warning"></i></span>
+                                            <input type="email" placeholder="Email" name="email" className={`${ss.login_input} border-0`} onChange={handleValueChange} required></input>
+                                        </span>
                                     </div>
-                                </div>
-                                {/* login button */}
-                                <div className="mt-5">
-                                    <button className="px-5 py-2 rounded bg-warning text-white fw-bold border-0">Login</button>
-                                </div>
-                            </form>
+                                    <div className="mt-5">
+                                        <span className="input-wrapper bg-white py-3 px-3 rounded">
+                                            <span><i className="bi bi-lock-fill me-1 text-warning"></i></span>
+                                            <input type="password" placeholder="Password" name="password" className={`${ss.login_input} border-0`} onChange={handleValueChange} required></input>
+                                        </span>
+                                    </div>
+
+                                    {/* error details */}
+
+                                    <p className="text-danger mt-3 text-start fw-bold">{errorMessage}</p>
+
+                                    {/* forget password */}
+                                    <div className="mt-4 d-flex justify-content-center">
+                                        <div className="d-flex justify-content-between" style={{ width: "280px" }}>
+                                            <div className="text-white">
+                                                <input type="checkbox" className="me-2" id="remember"></input>
+                                                <label htmlFor="remember">Remember me</label>
+                                            </div>
+                                            <a className="text-white" href="/">Forget Password</a>
+                                        </div>
+                                    </div>
+                                    {/* login button */}
+                                    <div className="mt-5">
+                                        <button className="px-5 py-2 rounded bg-warning text-white fw-bold border-0">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -2,34 +2,13 @@
     width: 280px;
 }
 
+.login_banner {
+    border-radius: 0 2rem;
+}
+
 .login_container {
     background-color: #70b0ed;
-    padding: 4rem 0;
+    padding: 6.4rem 0;
+    border-radius: 2rem;
 }
 
-/* loader */
-
-.loader {
-    display: inline-block;
-    background-color: blueviolet;
-    height: 1.5rem;
-    width: 1.5rem;
-    margin-right: 5px;
-    margin-left: 5px;
-    animation: roll 1s infinite;
-    transform: rotate(180deg);
-}
-
-.loader_wrapper {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-}
-
-/* roating loader */
-@keyframes roll {
-    0% {
-        transform: rotate(0);
-    }
-}
