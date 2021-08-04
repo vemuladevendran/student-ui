@@ -1,23 +1,27 @@
-import { React, useState } from 'react';
+import { React, useState, Fragment } from 'react';
 import ss from './login.module.css';
 import Loader from '../loader/loader';
 import axios from 'axios';
 import TokenServe from '../../service/token'
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 export default function Login() {
 
     const [formValues, setFormValues] = useState({ email: '', password: '' });
     const [errorMessage, setErrorMessage] = useState('');
     const [loader, setLoaderStatus] = useState(false);
+    const [open, setOpen] = useState(false);
 
 
     // handle form value change
     const handleValueChange = async (event) => {
         try {
-            // setting error message
-            setErrorMessage('');
             // changing loader status
             setLoaderStatus(false);
+            // closing snakbar
+            closeSnackbar();
             // setting form values
             setFormValues({
                 ...formValues,
@@ -45,11 +49,23 @@ export default function Login() {
             //  showing error message
             const errorMessage = error?.response?.data?.message;
             setErrorMessage(errorMessage);
+            openSnackbar();
         } finally {
             // finally changing the loader status
             setLoaderStatus(false);
         }
     }
+
+    // open snakbar
+    const openSnackbar = () => {
+        setOpen(true);
+    };
+    // close snakbar
+    const closeSnackbar = (event, reason) => {
+        setOpen(false);
+    };
+
+
 
 
     return (
@@ -82,10 +98,6 @@ export default function Login() {
                                         </span>
                                     </div>
 
-                                    {/* error details */}
-
-                                    <p className="text-danger mt-3 text-start fw-bold">{errorMessage}</p>
-
                                     {/* forget password */}
                                     <div className="mt-4 d-flex justify-content-center">
                                         <div className="d-flex justify-content-between" style={{ width: "280px" }}>
@@ -100,9 +112,29 @@ export default function Login() {
                                     <div className="mt-5">
                                         <button className="px-5 py-2 rounded bg-warning text-white fw-bold border-0">Login</button>
                                     </div>
+
+                                    {/* snakbar */}
+                                    <Snackbar
+                                        anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'center',
+                                        }}
+                                        open={open}
+                                        autoHideDuration={5000}
+                                        color="error"
+                                        onClose={closeSnackbar}
+                                        message={errorMessage}
+                                        action={
+                                            <Fragment>
+                                                <IconButton size="small" aria-label="close" color="inherit" onClick={closeSnackbar}>
+                                                    <CloseIcon fontSize="small" />
+                                                </IconButton>
+                                            </Fragment>
+                                        }
+                                    />
+
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
