@@ -8,8 +8,8 @@ init();
 function App() {
   return (
     <div className="App h-100">
-      <Login></Login>
-      {/* <AppShell></AppShell> */}
+      {/* <Login></Login> */}
+      <AppShell></AppShell>
     </div>
   );
 };
