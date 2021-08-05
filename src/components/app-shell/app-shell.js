@@ -20,6 +20,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { menuItems } from './sidenav-menu';
 import Students from '../student/student';
+import { NavLink } from 'react-router-dom'
+
 const drawerWidth = 240;
 
 //  app-shell styles
@@ -37,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
+            backgroundColor: '#70b0ed'
         },
     },
     menuButton: {
@@ -80,10 +83,12 @@ function ResponsiveDrawer(props) {
             <Divider />
             <List>
                 {menuItems.map((item, index) => (
-                    <ListItem button key={item.text}>
-                        <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
-                        <ListItemText primary={item.text} />
-                    </ListItem>
+                    <NavLink to={item.path} key={index}>
+                        <ListItem button key={item.text}>
+                            <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
+                            <ListItemText primary={item.text} />
+                        </ListItem>
+                    </NavLink>
                 ))}
             </List>
         </div>
@@ -169,6 +174,8 @@ function ResponsiveDrawer(props) {
                     </Drawer>
                 </Hidden>
             </nav>
+
+            {/* page to display */}
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Students></Students>

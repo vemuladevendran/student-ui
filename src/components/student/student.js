@@ -40,7 +40,7 @@ export default function Students() {
                 <div className="col-12 col-lg-9">
                     {/* filters */}
                     <div className="row">
-                        <div className="col-12 col-md-4 col-lg-2 m-2">
+                        <div className="col-12 col-md-4 col-lg-3 m-2">
                             {/* branch filter */}
                             <FormControl variant="outlined" className={`${ss.formControl}`}>
                                 <InputLabel id="demo-simple-select-outlined-label" className="bg-white px-2">BRANCH</InputLabel>
@@ -58,7 +58,7 @@ export default function Students() {
                                 </Select>
                             </FormControl>
                         </div>
-                        <div className="col-12 col-md-4 col-lg-2 m-2">
+                        <div className="col-12 col-md-4 col-lg-3 m-2">
                             {/* year filter */}
                             <FormControl variant="outlined" className={`${ss.formControl}`}>
                                 <InputLabel id="demo-simple-select-outlined-label" className="bg-white px-2">YEAR</InputLabel>
