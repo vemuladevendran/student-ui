@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import ss from './app-shell.module.css';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Icon from '@material-ui/core/Icon';
@@ -20,7 +21,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { menuItems } from './sidenav-menu';
 import Students from '../student/student';
-import { NavLink } from 'react-router-dom'
+import AddEditStudent from '../student/add-edit-student/add-edit-student';
+import { BrowserRouter, NavLink, Redirect, Route, Switch } from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -65,7 +67,6 @@ function ResponsiveDrawer(props) {
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [logOutMenu, setLogOutMenu] = useState(false)
-    // const [open, setOpen] = useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -78,20 +79,22 @@ function ResponsiveDrawer(props) {
 
 
     const drawer = (
-        <div>
-            <div className={classes.toolbar} />
-            <Divider />
-            <List>
-                {menuItems.map((item, index) => (
-                    <NavLink to={item.path} key={index}>
-                        <ListItem button key={item.text}>
-                            <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
-                            <ListItemText primary={item.text} />
-                        </ListItem>
-                    </NavLink>
-                ))}
-            </List>
-        </div>
+        <BrowserRouter>
+            <div>
+                <div className={classes.toolbar} />
+                <Divider />
+                <List>
+                    {menuItems.map((item, index) => (
+                        <NavLink to={item.path} key={index} className={`${ss.nav_link}`} activeClassName={`${ss.active_nav_item}`}>
+                            <ListItem button key={item.text}>
+                                <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
+                                <ListItemText primary={item.text} />
+                            </ListItem>
+                        </NavLink>
+                    ))}
+                </List>
+            </div>
+        </BrowserRouter>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
@@ -178,7 +181,15 @@ function ResponsiveDrawer(props) {
             {/* page to display */}
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Students></Students>
+                <Switch>
+                    <Route exact path='/students'>
+                        <Students></Students>
+                    </Route>
+                    <Route exact path='/students/add-student'>
+                        <AddEditStudent></AddEditStudent>
+                    </Route>
+                    <Redirect to="/students"></Redirect>
+                </Switch>
             </main>
         </div>
     );

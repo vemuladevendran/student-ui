@@ -1,0 +1,8 @@
+.nav_link {
+    text-decoration: none !important;
+}
+
+.active_nav_item {
+    background-color: #70b0ed;
+    color: white;
+}

@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 export default function Students() {
 
-    const students = Array(10).fill('');
+    const students = Array(5).fill('');
 
     // delete student
     const deleteStudent = async () => {
