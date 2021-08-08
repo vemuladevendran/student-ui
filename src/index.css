@@ -24,3 +24,7 @@ code {
 input:focus {
   outline: none;
 }
+
+#outlined-basic-label {
+  background-color: white;
+}

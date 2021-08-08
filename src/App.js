@@ -8,12 +8,11 @@ import TokenServe from './service/token'
 init();
 
 
-
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
   const token = TokenServe.isTokenExist()
   if (token === false) {
-    console.log(token)
+    // console.log(token)
   }
   return (
     <div className="App h-100">
