@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { FormControl, TextareaAutosize } from '@material-ui/core';
+import { FormControl } from '@material-ui/core';
 
 // image uppload
 const ProfileUpload = () => {

@@ -22,7 +22,7 @@ import Menu from "@material-ui/core/Menu";
 import { menuItems } from './sidenav-menu';
 import Students from '../student/student';
 import AddEditStudent from '../student/add-edit-student/add-edit-student';
-import { BrowserRouter, NavLink, Redirect, Route, Switch } from 'react-router-dom'
+import { NavLink, Redirect, Route, Switch } from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -79,22 +79,24 @@ function ResponsiveDrawer(props) {
 
 
     const drawer = (
-        <BrowserRouter>
-            <div>
-                <div className={classes.toolbar} />
-                <Divider />
-                <List>
-                    {menuItems.map((item, index) => (
-                        <NavLink to={item.path} key={index} className={`${ss.nav_link}`} activeClassName={`${ss.active_nav_item}`}>
+        <div>
+            <div className={classes.toolbar}>
+                <img src="/assets/logo.png" alt="logo" />
+            </div>
+            <Divider />
+            <List>
+                {menuItems.map((item, index) => (
+                    <div key={index}>
+                        <NavLink to={item.path} className={`${ss.nav_link}`} activeClassName="active_nav_item" exact>
                             <ListItem button key={item.text}>
                                 <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
                                 <ListItemText primary={item.text} />
                             </ListItem>
                         </NavLink>
-                    ))}
-                </List>
-            </div>
-        </BrowserRouter>
+                    </div>
+                ))}
+            </List>
+        </div>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;

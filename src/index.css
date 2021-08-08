@@ -28,3 +28,9 @@ input:focus {
 #outlined-basic-label {
   background-color: white;
 }
+
+
+.active_nav_item>div {
+  background-color: #70b0ed !important;
+  color: white !important;
+}
