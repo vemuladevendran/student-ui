@@ -48,66 +48,157 @@ const ProfileUpload = () => {
 export default function AddEditStudent() {
     return (
         <div className="container-fluid">
-            <div className="col-12 col-md-12 col-lg-6">
-                <h4>Personal Details</h4>
-                {/* name details */}
-                <div className="row">
-                    {/* profile photo */}
-                    <div className="col-12 col-md-6">
-                        <FormControl variant="outlined" className="w-100 my-3" required>
-                            <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Title</InputLabel>
-                            <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" name="title" label="Title" >
-                                <MenuItem value={'Mr'}>Mr</MenuItem>
-                                <MenuItem value={'Mrs'}>Mrs</MenuItem>
-                            </Select>
-                        </FormControl>
-                        <TextField id="outlined-basic" label="First Name" name="firstName" variant="outlined" className="w-100 my-3" required />
-                        <TextField id="outlined-basic" label="Last Name" name="lastName" variant="outlined" className="w-100 my-3" required />
+            <form className="row">
+                <p className="text-end text-danger">Fields are marked in * is required</p>
+                <section className="col-12 col-lg-6 shadow-lg rounded p-4">
+                    <h4>Personal Details</h4>
+                    {/* name details */}
+                    <div className="row">
+                        {/* profile photo */}
+                        <div className="col-12 col-md-6">
+                            <FormControl variant="outlined" className="w-100 my-3" required>
+                                <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Title</InputLabel>
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" name="title" label="Title" >
+                                    <MenuItem value={'Mr'}>Mr</MenuItem>
+                                    <MenuItem value={'Mrs'}>Mrs</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <TextField id="outlined-basic" label="First Name" name="firstName" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" label="Last Name" name="lastName" variant="outlined" className="w-100 my-3" required />
+                        </div>
+                        <div className="col-12 col-md-6 text-center">
+                            {/* image upload */}
+                            <ProfileUpload></ProfileUpload>
+                        </div>
                     </div>
-                    <div className="col-12 col-md-6 text-center">
-                        {/* image upload */}
-                        <ProfileUpload></ProfileUpload>
+                    {/* email details */}
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" label="email" name="email" type="email" variant="outlined" className="w-100 my-3" required />
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <FormControl variant="outlined" className="w-100 my-3" required>
+                                <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Gender</InputLabel>
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" name="gender" label="Gender" >
+                                    <MenuItem value={'male'}>Male</MenuItem>
+                                    <MenuItem value={'female'}>Female</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
                     </div>
-                </div>
-                {/* email details */}
-                <div className="row">
-                    <div className="col-12 col-md-6">
-                        <TextField id="outlined-basic" label="email" name="email" type="email" variant="outlined" className="w-100 my-3" required />
+                    {/* data of bith */}
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" label="DOB" name="dob" type="date" variant="outlined" className="w-100 my-3" required />
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" label="Mobile" type="tel" name="mobileNumber" variant="outlined" className="w-100 my-3" required />
+                        </div>
                     </div>
-                    <div className="col-12 col-md-6">
-                        <FormControl variant="outlined" className="w-100 my-3" required>
-                            <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Gender</InputLabel>
-                            <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" name="gender" label="Gender" >
-                                <MenuItem value={10}>Male</MenuItem>
-                                <MenuItem value={20}>Female</MenuItem>
-                            </Select>
-                        </FormControl>
+                    {/* family details */}
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" label="Father's Name" name="fatherName" variant="outlined" className="w-100 my-3" required />
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" label="Mothers's Name" name="motherName" variant="outlined" className="w-100 my-3" required />
+                        </div>
                     </div>
-                </div>
-                {/* data of bith */}
-                <div className="row">
-                    <div className="col-12 col-md-6">
-                        <TextField id="outlined-basic" label="DOB" name="dob" type="date" variant="outlined" className="w-100 my-3" required />
+                    {/* address */}
+                    <div className="col-12">
+                        <textarea placeholder="Address" name="address" className="w-100 my-3" style={{ height: '70px' }} required />
                     </div>
-                    <div className="col-12 col-md-6">
-                        <TextField id="outlined-basic" label="Mobile" type="tel" name="mobileNumber" variant="outlined" className="w-100 my-3" required />
+                </section>
+                {/* education details */}
+                <section className="col-12 col-lg-6 shadow-lg rounded p-4">
+                    <h4>Education Details</h4>
+                    {/* school details */}
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 1000, max: new Date().getFullYear() } }} label="Year of 10th" name="yearOf10" variant="outlined" className="w-100 my-3" required />
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 1000, max: new Date().getFullYear() } }} label="Year of 12th" name="yearOf12" variant="outlined" className="w-100 my-3" required />
+                        </div>
                     </div>
-                </div>
-                {/* family details */}
-                <div className="row">
-                    <div className="col-12 col-md-6">
-                        <TextField id="outlined-basic" label="Father's Name" name="fatherName" variant="outlined" className="w-100 my-3" required />
+                    {/* marks details */}
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 1, max: 100 } }} label="10th marks percentage" name="markPercentageOf10" variant="outlined" className="w-100 my-3" required />
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 1, max: 100 } }} label="12th marks percentage" name="markPercentageOf12" variant="outlined" className="w-100 my-3" required />
+                        </div>
                     </div>
-                    <div className="col-12 col-md-6">
-                        <TextField id="outlined-basic" label="Mothers's Name" name="motherName" variant="outlined" className="w-100 my-3" required />
+                    {/* school name */}
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" label="10th School Name" name="nameOf10School" variant="outlined" className="w-100 my-3" />
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" label="12th School Name" name="nameOf12School" variant="outlined" className="w-100 my-3" />
+                        </div>
                     </div>
-                </div>
-                {/* address */}
-                <div className="col-12">
-                    <textarea placeholder="Address" name="address" className="w-100 my-3" style={{ height: '70px' }} required />
-                </div>
-            </div>
-            <div className="col-12 col-md-6 col-lg-6"></div>
+                    <h4>College Details</h4>
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" label="Year of college joined" name="yearOfCollegeJoined" type="number" InputProps={{ inputProps: { min: 1000, max: new Date().getFullYear() } }} variant="outlined" className="w-100 my-3" />
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <FormControl variant="outlined" className="w-100 my-3" required>
+                                <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Current Studing Year</InputLabel>
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" name="currentStudingyear" label="Current Studing Year" >
+                                    <MenuItem value={1}>First Year</MenuItem>
+                                    <MenuItem value={2}>Second Year</MenuItem>
+                                    <MenuItem value={3}>Third Year</MenuItem>
+                                    <MenuItem value={4}>Fourth Year</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                    </div>
+                    {/* roll number details */}
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" label="Roll Number" name="rollNumber" variant="outlined" className="w-100 my-3" required />
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <TextField id="outlined-basic" label="Exam Number" name="examNumber" variant="outlined" className="w-100 my-3" required />
+                        </div>
+                    </div>
+                    {/* branch details */}
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <FormControl variant="outlined" className="w-100 my-3" required>
+                                <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Branch</InputLabel>
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" name="branch" label="Branch" >
+                                    <MenuItem value={'it'}>Information Technology</MenuItem>
+                                    <MenuItem value={'cse'}>Computer Science</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <FormControl variant="outlined" className="w-100 my-3" required>
+                                <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Section</InputLabel>
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" name="section" label="Section" >
+                                    <MenuItem value={"a"}>A</MenuItem>
+                                    <MenuItem value={"b"}>B</MenuItem>
+                                    <MenuItem value={"c"}>C</MenuItem>
+                                    <MenuItem value={"d"}>D</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                    </div>
+                    {/* button section */}
+                    <div className="d-md-flex justify-content-center">
+                        <div className="m-2">
+                            <button type="button" className="btn btn-light border border-dark px-5 w-100">Cancel</button>
+                        </div>
+                        <div className="m-2">
+                            <button className="btn btn-primary px-5 w-100">Save</button>
+                        </div>
+                    </div>
+                </section>
+            </form>
         </div>
     );
 }

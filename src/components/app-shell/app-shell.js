@@ -17,8 +17,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
 import { menuItems } from './sidenav-menu';
 import Students from '../student/student';
 import AddEditStudent from '../student/add-edit-student/add-edit-student';
@@ -66,17 +64,10 @@ function ResponsiveDrawer(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [logOutMenu, setLogOutMenu] = useState(false)
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
-    const handleLogOutMenuToggle = () => {
-        setLogOutMenu(!logOutMenu);
-    }
-
-
 
     const drawer = (
         <div>
@@ -134,33 +125,25 @@ function ResponsiveDrawer(props) {
                     <Typography variant="h6" noWrap>
                         Responsive drawer
                     </Typography>
-                    <IconButton
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={handleLogOutMenuToggle}
-                        edge="end"
-                        color="inherit"
-                    >
-                        <AccountCircle edge="end" />
-                    </IconButton>
-                    <Menu
-                        id="menu-appbar"
-                        anchorOrigin={{
-                            vertical: "top",
-                            horizontal: "right"
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: "top",
-                            horizontal: "right"
-                        }}
-                        open={logOutMenu}
-                        onClose={handleLogOutMenuToggle}
-                    >
-                        <MenuItem onClick={handleLogOutMenuToggle}>Log Out</MenuItem>
-                        <MenuItem onClick={handleLogOutMenuToggle}>Update Password</MenuItem>
-                    </Menu>
+
+                    {/* acount profile */}
+                    <div className="btn-group" role="group">
+                        <span id="btnGroupDrop1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <AccountCircle edge="end" />
+                        </span>
+                        <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li>
+                                <div className="dropdown-item my-2">
+                                    <NavLink className="text-decoration-none" to="/">Update Password</NavLink>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="dropdown-item my-2 text-center">
+                                    <button type="button" className="btn btn-primary">LogOut</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders">
