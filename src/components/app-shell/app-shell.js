@@ -84,10 +84,25 @@ function ResponsiveDrawer(props) {
                 <img src="/assets/logo.png" alt="logo" />
             </div>
             <Divider />
+            {/* mobile screen */}
             <List>
                 {menuItems.map((item, index) => (
                     <div key={index}>
-                        <NavLink to={item.path} className={`${ss.nav_link}`} activeClassName="active_nav_item" exact>
+                        <NavLink to={item.path} className={`${ss.nav_link} d-md-none`} activeClassName="active_nav_item" exact onClick={handleDrawerToggle}>
+                            <ListItem button key={item.text}>
+                                <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
+                                <ListItemText primary={item.text} />
+                            </ListItem>
+                        </NavLink>
+                    </div>
+                ))}
+            </List>
+
+            {/* desktop screen */}
+            <List>
+                {menuItems.map((item, index) => (
+                    <div key={index}>
+                        <NavLink to={item.path} className={`${ss.nav_link} d-none d-md-block`} activeClassName="active_nav_item" exact>
                             <ListItem button key={item.text}>
                                 <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
                                 <ListItemText primary={item.text} />

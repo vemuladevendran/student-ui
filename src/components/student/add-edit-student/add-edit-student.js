@@ -56,7 +56,7 @@ export default function AddEditStudent() {
                     <div className="col-12 col-md-6">
                         <FormControl variant="outlined" className="w-100 my-3" required>
                             <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Title</InputLabel>
-                            <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" name="title" label="title" >
+                            <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" name="title" label="Title" >
                                 <MenuItem value={'Mr'}>Mr</MenuItem>
                                 <MenuItem value={'Mrs'}>Mrs</MenuItem>
                             </Select>

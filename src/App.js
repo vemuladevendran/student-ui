@@ -9,11 +9,8 @@ init();
 
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
-  const token = TokenServe.isTokenExist()
-  if (token === false) {
-    // console.log(token)
-  }
+  const token = TokenServe.isTokenExist();
+  const [loggedIn, setLoggedIn] = useState(token);
   return (
     <div className="App h-100">
       <BrowserRouter>
