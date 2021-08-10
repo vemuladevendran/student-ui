@@ -1,4 +1,3 @@
-import ss from './view-student.module.css'
 import Swal from 'sweetalert2';
 
 
@@ -55,8 +54,7 @@ function ViewStudent() {
                             </div>
                         </div>
                         <div className="col-12 col-md-6 col-lg-4">
-                            {/* <img src="/assets/default-profile.png" alt="profile" className={`${ss.profile_image}`} /> */}
-                            <img src="/assets/photo.jpeg" alt="profile" className="w-100" />
+                            <img src="/assets/default-profile.png" alt="profile" className="w-100"/>
                         </div>
                         {/* lastupdate details */}
                         <div className="d-md-flex justify-content-between mt-3">
