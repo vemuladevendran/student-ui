@@ -37,7 +37,7 @@ function ViewStudent() {
                     {/* profile image */}
                     <div className="row shadow-lg p-3 w-100 m-0">
                         <h2 className="text-center">Personal Details</h2>
-                        <div className="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
+                        <div className="col-12 col-md-6 col-lg-8 d-flex flex-column justify-content-center align-items-center">
                             <p className="fw-bold h5">DEVENDRAN V</p>
                             <p>2019PECIT248</p>
                             <p>INFORMATION TECHNOLOGY</p>
@@ -54,8 +54,14 @@ function ViewStudent() {
                                 <button type="button" className="btn btn-danger" onClick={deleteStudent}>Delete</button>
                             </div>
                         </div>
-                        <div className="col-12 col-md-6">
-                            <img src="/assets/default-profile.png" alt="profile" className={`${ss.profile_image}`} />
+                        <div className="col-12 col-md-6 col-lg-4">
+                            {/* <img src="/assets/default-profile.png" alt="profile" className={`${ss.profile_image}`} /> */}
+                            <img src="/assets/photo.jpeg" alt="profile" className="w-100" />
+                        </div>
+                        {/* lastupdate details */}
+                        <div className="d-md-flex justify-content-between mt-3">
+                            <p>Created By : <span>ADMIN</span></p>
+                            <p>LastUpdate : <span>23/08/2021</span></p>
                         </div>
                     </div>
                     {/* contact details */}
