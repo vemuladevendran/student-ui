@@ -4,6 +4,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import { NavLink } from 'react-router-dom';
 
 export default function Students() {
 
@@ -95,7 +96,7 @@ export default function Students() {
                                                 <p>Exam No: <span>211419205038</span></p>
                                             </div>
                                             <div className="d-flex justify-content-between">
-                                                <a href="/" className="btn btn-primary">View Details</a>
+                                                <NavLink to="students/view-student" className="btn btn-primary">View Details</NavLink>
                                                 <div>
                                                     <button type="button" className="btn btn-secondary mx-1"><i className="bi bi-pen-fill"></i></button>
                                                     <button type="button" className="btn btn-danger" onClick={deleteStudent}><i className="bi bi-trash-fill"></i></button>

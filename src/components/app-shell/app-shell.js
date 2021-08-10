@@ -20,6 +20,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { menuItems } from './sidenav-menu';
 import Students from '../student/student';
 import AddEditStudent from '../student/add-edit-student/add-edit-student';
+import ViewStudent from '../student/view-student/view-student';
 import { NavLink, Redirect, Route, Switch } from 'react-router-dom'
 
 const drawerWidth = 240;
@@ -187,6 +188,9 @@ function ResponsiveDrawer(props) {
                     </Route>
                     <Route exact path='/students/add-student'>
                         <AddEditStudent></AddEditStudent>
+                    </Route>
+                    <Route exact path='/students/view-student'>
+                        <ViewStudent></ViewStudent>
                     </Route>
                     <Redirect to="/students"></Redirect>
                 </Switch>

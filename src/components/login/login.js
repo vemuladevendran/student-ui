@@ -6,9 +6,9 @@ import TokenServe from '../../service/token'
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-export default function Login() {
+function Login(props) {
 
     const [formValues, setFormValues] = useState({ email: '', password: '' });
     const [errorMessage, setErrorMessage] = useState('');
@@ -46,7 +46,7 @@ export default function Login() {
             //  save login token
             const token = result.data.token;
             TokenServe.saveToken(token);
-            <Redirect push to="/students"></Redirect>
+            props.history.push('/students')
         } catch (error) {
             //  showing error message
             const errorMessage = error?.response?.data?.message;
@@ -134,7 +134,6 @@ export default function Login() {
                                             </Fragment>
                                         }
                                     />
-
                                 </form>
                             </div>
                         </div>
@@ -145,3 +144,8 @@ export default function Login() {
     );
 
 }
+
+
+const login = withRouter(Login);
+
+export default login;
