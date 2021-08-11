@@ -69,6 +69,10 @@ function AddEditStudent(props) {
     const closeSnackbar = () => {
         setOpen(false);
     };
+    const goBack = () => {
+        props.history.goBack();
+    }
+
     // handle form submit
     const handleSubmit = async (event) => {
         try {
@@ -94,8 +98,6 @@ function AddEditStudent(props) {
             setLoaderStatus(false);
         }
     }
-
-
 
     return (
         <div className="container-fluid">
@@ -246,7 +248,7 @@ function AddEditStudent(props) {
                     {/* button section */}
                     <div className="d-md-flex justify-content-center">
                         <div className="m-2">
-                            <button type="button" className="btn btn-light border border-dark px-5 w-100">Cancel</button>
+                            <button type="button" className="btn btn-light border border-dark px-5 w-100" onClick={goBack}>Cancel</button>
                         </div>
                         <div className="m-2">
                             <button className="btn btn-primary px-5 w-100">Save</button>

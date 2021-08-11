@@ -25,7 +25,7 @@ function App() {
             </Switch>
           ) : (
             <Switch>
-              <Route path='/students'>
+              <Route path='/'>
                 <AppShell></AppShell>
               </Route>
               <Redirect to="/students"></Redirect>

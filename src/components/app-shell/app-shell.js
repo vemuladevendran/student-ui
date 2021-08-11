@@ -18,11 +18,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { menuItems } from './sidenav-menu';
+import { NavLink, Redirect, Route, Switch } from 'react-router-dom'
 import Students from '../student/student';
 import AddEditStudent from '../student/add-edit-student/add-edit-student';
 import ViewStudent from '../student/view-student/view-student';
-import { NavLink, Redirect, Route, Switch } from 'react-router-dom'
-
+import Users from '../users/user';
+import AddUser from '../users/add-user/add-user';
 const drawerWidth = 240;
 
 //  app-shell styles
@@ -188,6 +189,12 @@ function ResponsiveDrawer(props) {
                     </Route>
                     <Route exact path='/students/add-student'>
                         <AddEditStudent></AddEditStudent>
+                    </Route>
+                    <Route exact path='/users'>
+                        <Users></Users>
+                    </Route>
+                    <Route exact path='/users/add-user'>
+                        <AddUser></AddUser>
                     </Route>
                     <Route exact path='/students/view-student'>
                         <ViewStudent></ViewStudent>
