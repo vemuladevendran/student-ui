@@ -19,13 +19,13 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { menuItems } from './sidenav-menu';
 import { NavLink, Redirect, Route, Switch } from 'react-router-dom'
+import TokenServe from '../../service/token';
 import Students from '../student/student';
 import AddEditStudent from '../student/add-edit-student/add-edit-student';
 import ViewStudent from '../student/view-student/view-student';
 import Users from '../users/user';
 import AddUser from '../users/add-user/add-user';
-import TokenServe from '../../service/token';
-
+import AddCircular from '../circular/add-circular';
 
 const drawerWidth = 240;
 
@@ -232,6 +232,9 @@ function ResponsiveDrawer(props) {
                     </Route>
                     <Route exact path='/students/view-student'>
                         <ViewStudent></ViewStudent>
+                    </Route>
+                    <Route exact path='/add-circular'>
+                        <AddCircular></AddCircular>
                     </Route>
 
                     {
