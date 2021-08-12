@@ -7,4 +7,5 @@ export const menuItems = [
     ['dashboard', 'Users', '/users', 'admin'],
     ['group_add', 'Add User', '/users/add-user', 'admin'],
     ['assignment', 'Add Circular', '/add-circular', 'all'],
+    ['bug_report', 'Create Report', '/create-report', 'all'],
 ].map(([icon, text, path, acl]) => ({ icon, text, path, acl }));

@@ -54,6 +54,7 @@ function Login(props) {
             const errorMessage = error?.response?.data?.message;
             setErrorMessage(errorMessage);
             openSnackbar();
+            setLoaderStatus(false);
         }
     }
 

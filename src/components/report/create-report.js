@@ -1,10 +1,6 @@
 import { React, useState } from 'react';
 import Swal from 'sweetalert2';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import { FormControl } from '@material-ui/core';
 import Loader from '../loader/loader';
 import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -14,15 +10,15 @@ import { withRouter } from 'react-router-dom';
 
 
 
-function AddCircular(props) {
+function CreateReport(props) {
     const [errorMessage, setErrorMessage] = useState('');
     const [loader, setLoaderStatus] = useState(false);
     const [open, setOpen] = useState(false);
     const [formValues, setFormValues] = useState({
-        circularTitle: '',
-        circularDate: '',
-        circularFor: '',
-        circularContent: '',
+        reportTitle: '',
+        reportDate: '',
+        studentRollNumber: '',
+        reportContent: '',
     });
 
     // handle formvalue change
@@ -64,8 +60,8 @@ function AddCircular(props) {
 
             const data = formValues;
             console.log(data);
-            await axios.post('http://localhost:3000/api/v1/circular', data);
-            const result = await Swal.fire('New Circular Added Successfuly');
+            await axios.post('http://localhost:3000/api/v1/report', data);
+            const result = await Swal.fire('New Report Created');
             setLoaderStatus(false);
             if (result.isConfirmed) {
                 props.history.push('/students')
@@ -88,24 +84,17 @@ function AddCircular(props) {
             }
             <form className="row h-100 justify-content-center align-items-center" onSubmit={handleSubmit}>
                 <section className="col-12 col-md-6 shadow p-4">
-                    <TextField id="outlined-basic" label="Circular Title" onChange={handleFormvaluechange} name="circularTitle" variant="outlined" className="w-100 my-3" required />
-                    <TextField id="outlined-basic" label="Circular Date" onChange={handleFormvaluechange} name="circularDate" type="date" variant="outlined" className="w-100 my-3" required />
-                    <FormControl variant="outlined" className="w-100 my-3" required>
-                        <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Circular For</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="circularFor" label="Circular For" >
-                            <MenuItem value={'all'}>All</MenuItem>
-                            <MenuItem value={'it'}>Information Technology</MenuItem>
-                            <MenuItem value={'cse'}>Computer Science</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <textarea placeholder="Address" onChange={handleFormvaluechange} name="circularContent" className="w-100 my-3" style={{ height: '100px' }} required />
+                    <TextField id="outlined-basic" label="Report Title" onChange={handleFormvaluechange} name="reportTitle" variant="outlined" className="w-100 my-3" required />
+                    <TextField id="outlined-basic" label="Report Date" onChange={handleFormvaluechange} name="reportDate" type="date" variant="outlined" className="w-100 my-3" required />
+                    <TextField id="outlined-basic" label="Student RollNumber" onChange={handleFormvaluechange} name="studentRollNumber" variant="outlined" className="w-100 my-3" required />
+                    <textarea placeholder="Address" onChange={handleFormvaluechange} name="reportContent" className="w-100 my-3" style={{ height: '100px' }} required />
                     {/* button section */}
                     <div className="d-md-flex justify-content-center">
                         <div className="m-2">
                             <button type="button" className="btn btn-light border border-dark px-5 w-100" onClick={goBack}>Cancel</button>
                         </div>
                         <div className="m-2">
-                            <button className="btn btn-primary px-5 w-100">Save</button>
+                            <button className="btn btn-primary px-5 w-100">Report</button>
                         </div>
                     </div>
                 </section>
@@ -137,4 +126,4 @@ function AddCircular(props) {
 
 
 
-export default withRouter(AddCircular);
+export default withRouter(CreateReport);

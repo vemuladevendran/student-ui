@@ -26,7 +26,7 @@ import ViewStudent from '../student/view-student/view-student';
 import Users from '../users/user';
 import AddUser from '../users/add-user/add-user';
 import AddCircular from '../circular/add-circular';
-
+import CreateReport from '../report/create-report';
 const drawerWidth = 240;
 
 //  app-shell styles
@@ -235,6 +235,9 @@ function ResponsiveDrawer(props) {
                     </Route>
                     <Route exact path='/add-circular'>
                         <AddCircular></AddCircular>
+                    </Route>
+                    <Route exact path='/create-report'>
+                        <CreateReport></CreateReport>
                     </Route>
 
                     {
