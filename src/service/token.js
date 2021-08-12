@@ -21,6 +21,15 @@ class Token extends PureComponent {
         localStorage.removeItem(this.tokenKey);
     }
 
+
+    getTokenPayloadData(token) {
+
+        const base64PayloadData = token.split('.')[1].split('.')[0];
+        const payload = Buffer.from(base64PayloadData, 'base64');
+        const data = JSON.parse(payload.toString()).data;
+        return (data);
+    }
+
 };
 
 export default new Token();

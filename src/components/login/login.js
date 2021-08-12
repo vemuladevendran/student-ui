@@ -46,15 +46,14 @@ function Login(props) {
             //  save login token
             const token = result.data.token;
             TokenServe.saveToken(token);
-            props.history.push('/students')
+            // finally changing the loader status
+            setLoaderStatus(false);
+            props.setLoggedIn(true);
         } catch (error) {
             //  showing error message
             const errorMessage = error?.response?.data?.message;
             setErrorMessage(errorMessage);
             openSnackbar();
-        } finally {
-            // finally changing the loader status
-            setLoaderStatus(false);
         }
     }
 

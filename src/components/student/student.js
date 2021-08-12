@@ -1,12 +1,29 @@
-import ss from './student.module.css'
+import ss from './student.module.css';
+import { React, useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { NavLink } from 'react-router-dom';
+import TokenServe from '../../service/token';
+
 
 export default function Students() {
+
+    const [isAdmin, setIsAdmin] = useState();
+
+    // getting token data
+    const getTokenData = () => {
+        const token = TokenServe.getToken();
+        return (TokenServe.getTokenPayloadData(token));
+    }
+
+    useEffect(() => {
+        const data = getTokenData();
+        setIsAdmin(data.isAdmin);
+
+    }, []);
 
     const students = Array(5).fill('');
 
@@ -32,6 +49,8 @@ export default function Students() {
             }
         }
     }
+
+
 
     return (
         <div className="container-fluid">
@@ -99,7 +118,11 @@ export default function Students() {
                                                 <NavLink to="students/view-student" className="btn btn-primary">View Details</NavLink>
                                                 <div>
                                                     <button type="button" className="btn btn-secondary mx-1"><i className="bi bi-pen-fill"></i></button>
-                                                    <button type="button" className="btn btn-danger" onClick={deleteStudent}><i className="bi bi-trash-fill"></i></button>
+                                                    {
+                                                        isAdmin === 'true' ? (
+                                                            <button type="button" className="btn btn-danger" onClick={deleteStudent}><i className="bi bi-trash-fill"></i></button>
+                                                        ) : null
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -115,6 +138,7 @@ export default function Students() {
                     <img src="/assets/graph-2.png" className="card-img-top w-100" alt="..." />
                 </div>
             </div>
+
         </div>
     );
 }

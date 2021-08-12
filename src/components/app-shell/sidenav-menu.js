@@ -1,6 +1,9 @@
+
+
+
 export const menuItems = [
-    ['dashboard', 'Students', '/students'],
-    ['person_add', 'Add Student', '/students/add-student'],
-    ['dashboard', 'Users', '/users'],
-    ['group_add', 'Add User', '/users/add-user'],
-].map(([icon, text, path]) => ({ icon, text, path }));
+    ['dashboard', 'Students', '/students', 'all'],
+    ['person_add', 'Add Student', '/students/add-student', 'all'],
+    ['dashboard', 'Users', '/users', 'admin'],
+    ['group_add', 'Add User', '/users/add-user', 'admin'],
+].map(([icon, text, path, acl]) => ({ icon, text, path, acl }));

@@ -19,14 +19,14 @@ function App() {
           !loggedIn ? (
             <Switch>
               <Route exact path='/login'>
-                <Login></Login>
+                <Login setLoggedIn={setLoggedIn}></Login>
               </Route>
               <Redirect to="/login"></Redirect>
             </Switch>
           ) : (
             <Switch>
               <Route path='/'>
-                <AppShell></AppShell>
+                <AppShell setLoggedIn={setLoggedIn}></AppShell>
               </Route>
               <Redirect to="/students"></Redirect>
             </Switch>

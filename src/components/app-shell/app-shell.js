@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import ss from './app-shell.module.css';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -24,6 +24,9 @@ import AddEditStudent from '../student/add-edit-student/add-edit-student';
 import ViewStudent from '../student/view-student/view-student';
 import Users from '../users/user';
 import AddUser from '../users/add-user/add-user';
+import TokenServe from '../../service/token';
+
+
 const drawerWidth = 240;
 
 //  app-shell styles
@@ -66,6 +69,23 @@ function ResponsiveDrawer(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [isAdmin, setIsAdmin] = useState();
+    // getting token data
+    const getTokenData = () => {
+        const token = TokenServe.getToken();
+        return (TokenServe.getTokenPayloadData(token));
+    }
+
+    useEffect(() => {
+        const data = getTokenData();
+        setIsAdmin(data.isAdmin);
+    }, []);
+
+
+    const logOut = () => {
+        TokenServe.removeToken();
+        props.setLoggedIn(false);
+    }
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -79,30 +99,50 @@ function ResponsiveDrawer(props) {
             <Divider />
             {/* mobile screen */}
             <List>
-                {menuItems.map((item, index) => (
-                    <div key={index}>
-                        <NavLink to={item.path} className={`${ss.nav_link} d-md-none`} activeClassName="active_nav_item" exact onClick={handleDrawerToggle}>
-                            <ListItem button key={item.text}>
-                                <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
-                                <ListItemText primary={item.text} />
-                            </ListItem>
-                        </NavLink>
-                    </div>
-                ))}
+                {
+                    menuItems.map((item, index) => {
+                        const isAdminRoute = (isAdmin === 'true' && item.acl === 'admin');
+
+                        if (item.acl === 'all' || isAdminRoute) {
+                            return (
+                                <div key={index}>
+                                    <NavLink to={item.path} className={`${ss.nav_link} d-md-none`} activeClassName="active_nav_item" exact onClick={handleDrawerToggle}>
+                                        <ListItem button key={item.text}>
+                                            <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
+                                            <ListItemText primary={item.text} />
+                                        </ListItem>
+                                    </NavLink>
+                                </div>
+                            )
+                        }
+
+                        return null;
+                    })
+                }
             </List>
 
             {/* desktop screen */}
             <List>
-                {menuItems.map((item, index) => (
-                    <div key={index}>
-                        <NavLink to={item.path} className={`${ss.nav_link} d-none d-md-block`} activeClassName="active_nav_item" exact>
-                            <ListItem button key={item.text}>
-                                <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
-                                <ListItemText primary={item.text} />
-                            </ListItem>
-                        </NavLink>
-                    </div>
-                ))}
+                {
+                    menuItems.map((item, index) => {
+                        const isAdminRoute = (isAdmin === 'true' && item.acl === 'admin');
+
+                        if (item.acl === 'all' || isAdminRoute) {
+                            return (
+                                <div key={index}>
+                                    <NavLink to={item.path} className={`${ss.nav_link} d-none d-md-block`} activeClassName="active_nav_item" exact>
+                                        <ListItem button key={item.text}>
+                                            <ListItemIcon><Icon style={{ fontSize: 30 }}>{item.icon}</Icon></ListItemIcon>
+                                            <ListItemText primary={item.text} />
+                                        </ListItem>
+                                    </NavLink>
+                                </div>
+                            )
+                        }
+
+                        return null;
+                    })
+                }
             </List>
         </div>
     );
@@ -141,7 +181,7 @@ function ResponsiveDrawer(props) {
                             </li>
                             <li>
                                 <div className="dropdown-item my-2 text-center">
-                                    <button type="button" className="btn btn-primary">LogOut</button>
+                                    <button type="button" className="btn btn-primary" onClick={logOut}>LogOut</button>
                                 </div>
                             </li>
                         </ul>
@@ -190,15 +230,23 @@ function ResponsiveDrawer(props) {
                     <Route exact path='/students/add-student'>
                         <AddEditStudent></AddEditStudent>
                     </Route>
-                    <Route exact path='/users'>
-                        <Users></Users>
-                    </Route>
-                    <Route exact path='/users/add-user'>
-                        <AddUser></AddUser>
-                    </Route>
                     <Route exact path='/students/view-student'>
                         <ViewStudent></ViewStudent>
                     </Route>
+
+                    {
+                        isAdmin === 'true' ? (
+                            <div>
+                                <Route exact path='/users'>
+                                    <Users></Users>
+                                </Route>
+                                <Route exact path='/users/add-user'>
+                                    <AddUser></AddUser>
+                                </Route>
+                            </div>
+                        ) : null
+                    }
+
                     <Redirect to="/students"></Redirect>
                 </Switch>
             </main>

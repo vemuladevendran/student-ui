@@ -30,7 +30,7 @@ const ProfileUpload = () => {
             <div className="position-relative">
                 <img className={`${ss.profile_image} w-100`} src={imageUpload} alt="profile" />
                 <div className="w-100 position-absolute" style={{ bottom: '2px' }}>
-                    <button type="button" className="px-5 py-2 border-0 bg-white text-dark fw-bold rounded" onClick={openImageSelection}>{`${imageUpload === defaultImageUrl ? 'Upload Profile' : 'Cancel'}`}</button>
+                    <button type="button" className="px-5 py-2 border-0 bg-white text-dark fw-bold rounded" onClick={openImageSelection}>{`${imageUpload === defaultImageUrl ? 'Upload' : 'Cancel'}`}</button>
                 </div>
             </div>
         </div>
