@@ -67,7 +67,6 @@ function AddUser(props) {
             //  sending Ajax call
 
             const data = formValues;
-            console.log(data);
             await axios.post('http://localhost:3000/api/v1/users', data);
             const result = await Swal.fire('New User Added Successfuly');
             // finally changing the loader status
@@ -80,10 +79,9 @@ function AddUser(props) {
             const errorMessage = error?.response.data.message;
             setErrorMessage(errorMessage);
             openSnackbar();
-        } finally {
             // finally changing the loader status
             setLoaderStatus(false);
-        }
+        } 
     }
 
     return (

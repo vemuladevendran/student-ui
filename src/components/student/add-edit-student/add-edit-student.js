@@ -13,6 +13,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
+import TokenServe from '../../../service/token';
 
 function AddEditStudent(props) {
 
@@ -82,21 +83,25 @@ function AddEditStudent(props) {
             //  sending Ajax call
             const data = formValues;
             console.log(data);
-            await axios.post('http://localhost:3000/api/v1/student', data);
+            const token = TokenServe.getToken();
+            const payload = TokenServe.getTokenPayloadData(token);
+            const userId = payload.id;
+            await axios.post(`http://localhost:3000/api/v1/student/${userId}`, data);
+            // finally changing the loader status
+            setLoaderStatus(false);
             const result = await Swal.fire('New Student Added Successfuly');
             if (result.isConfirmed) {
                 props.history.push('/students')
             }
         } catch (error) {
             //  showing error message
-            const errorMessage = error?.response;
+            const errorMessage = error?.response.data.message;
             console.error(errorMessage)
-            // setErrorMessage(errorMessage);
+            setErrorMessage(errorMessage);
             openSnackbar();
-        } finally {
             // finally changing the loader status
             setLoaderStatus(false);
-        }
+        } 
     }
 
     return (

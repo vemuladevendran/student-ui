@@ -27,6 +27,8 @@ import Users from '../users/user';
 import AddUser from '../users/add-user/add-user';
 import AddCircular from '../circular/add-circular';
 import CreateReport from '../report/create-report';
+import UpdatePassword from '../update-password/update-password';
+import Profile from '../profile/profile';
 const drawerWidth = 240;
 
 //  app-shell styles
@@ -176,7 +178,7 @@ function ResponsiveDrawer(props) {
                         <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
                             <li>
                                 <div className="dropdown-item my-2">
-                                    <NavLink className="text-decoration-none" to="/">Update Password</NavLink>
+                                    <NavLink className="text-decoration-none" to="/update-password">Update Password</NavLink>
                                 </div>
                             </li>
                             <li>
@@ -238,6 +240,12 @@ function ResponsiveDrawer(props) {
                     </Route>
                     <Route exact path='/create-report'>
                         <CreateReport></CreateReport>
+                    </Route>
+                    <Route exact path='/update-password'>
+                        <UpdatePassword></UpdatePassword>
+                    </Route>
+                    <Route exact path='/profile'>
+                        <Profile></Profile>
                     </Route>
 
                     {
