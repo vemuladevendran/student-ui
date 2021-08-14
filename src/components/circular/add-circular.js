@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -11,13 +11,14 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
-
+import departments from '../../service/departement/branches';
 
 
 function AddCircular(props) {
     const [errorMessage, setErrorMessage] = useState('');
     const [loader, setLoaderStatus] = useState(false);
     const [open, setOpen] = useState(false);
+    const [branches, setBranches] = useState();
     const [formValues, setFormValues] = useState({
         circularTitle: '',
         circularDate: '',
@@ -80,6 +81,12 @@ function AddCircular(props) {
     }
 
 
+
+    useEffect(() => {
+        const data = departments();
+        setBranches(data);
+    }, [])
+
     return (
         <div className="container h-100">
             {/* loader */}
@@ -94,8 +101,13 @@ function AddCircular(props) {
                         <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Circular For</InputLabel>
                         <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="circularFor" label="Circular For" >
                             <MenuItem value={'all'}>All</MenuItem>
-                            <MenuItem value={'it'}>Information Technology</MenuItem>
-                            <MenuItem value={'cse'}>Computer Science</MenuItem>
+                            {
+                                branches?.map(x => {
+                                    return (
+                                        <MenuItem key={Math.random()} value={x}>{x}</MenuItem>
+                                    );
+                                })
+                            }
                         </Select>
                     </FormControl>
                     <textarea placeholder="Address" onChange={handleFormvaluechange} name="circularContent" className="w-100 my-3" style={{ height: '100px' }} required />

@@ -7,10 +7,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { NavLink } from 'react-router-dom';
 import TokenServe from '../../service/token';
-
+import departments from '../../service/departement/branches';
 
 export default function Students() {
-
+    const [branches, setBranches] = useState();
     const [isAdmin, setIsAdmin] = useState();
 
     // getting token data
@@ -51,6 +51,12 @@ export default function Students() {
     }
 
 
+    useEffect(() => {
+        const data = departments();
+        setBranches(data);
+    }, [])
+
+
 
     return (
         <div className="container-fluid">
@@ -70,11 +76,15 @@ export default function Students() {
                                     label="BRANCH"
                                 >
                                     <MenuItem value="">
-                                        <em>None</em>
+                                        <em>All</em>
                                     </MenuItem>
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    {
+                                        branches?.map(x => {
+                                            return (
+                                                <MenuItem key={Math.random()} value={x}>{x}</MenuItem>
+                                            );
+                                        })
+                                    }
                                 </Select>
                             </FormControl>
                         </div>
@@ -88,11 +98,12 @@ export default function Students() {
                                     label="BRANCH"
                                 >
                                     <MenuItem value="">
-                                        <em>None</em>
+                                        <em>All</em>
                                     </MenuItem>
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    <MenuItem value={'First Year'}>First Year</MenuItem>
+                                    <MenuItem value={'Second Year'}>Second Year</MenuItem>
+                                    <MenuItem value={'Third Year'}>Third Year</MenuItem>
+                                    <MenuItem value={'Fourth Year'}>Fourth Year</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>

@@ -250,14 +250,14 @@ function ResponsiveDrawer(props) {
 
                     {
                         isAdmin === 'true' ? (
-                            <div>
+                            <>
                                 <Route exact path='/users'>
                                     <Users></Users>
                                 </Route>
                                 <Route exact path='/users/add-user'>
                                     <AddUser></AddUser>
                                 </Route>
-                            </div>
+                            </>
                         ) : null
                     }
 

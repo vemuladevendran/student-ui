@@ -1,6 +1,8 @@
 import './App.css';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Login from './components/login/login';
+import Forgetpassword from './components/forget-password/forgetpassword';
+import ResetPassword from './components/forget-password/reset-password/reset-password';
 import AppShell from './components/app-shell/app-shell'
 import { init } from './service/auth/auth-token';
 import { useState } from 'react';
@@ -20,6 +22,12 @@ function App() {
             <Switch>
               <Route exact path='/login'>
                 <Login setLoggedIn={setLoggedIn}></Login>
+              </Route>
+              <Route exact path='/forget-password'>
+                <Forgetpassword></Forgetpassword>
+              </Route>
+              <Route exact path='/reset-password/:id/:otp'>
+                <ResetPassword></ResetPassword>
               </Route>
               <Redirect to="/login"></Redirect>
             </Switch>

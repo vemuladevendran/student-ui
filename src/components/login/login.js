@@ -6,7 +6,7 @@ import TokenServe from '../../service/token'
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 function Login(props) {
 
@@ -107,7 +107,7 @@ function Login(props) {
                                                 <input type="checkbox" className="me-2" id="remember"></input>
                                                 <label htmlFor="remember">Remember me</label>
                                             </div>
-                                            <a className="text-white" href="/">Forget Password</a>
+                                            <NavLink className="text-white" to="/forget-password">Forget Password</NavLink>
                                         </div>
                                     </div>
                                     {/* login button */}

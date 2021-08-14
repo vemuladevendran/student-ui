@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import ss from './add-edit-student.module.css'
 import ProfileUpload from '../../../common-models/profile-uploader/image-uploader';
 import Swal from 'sweetalert2';
@@ -14,12 +14,13 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
 import TokenServe from '../../../service/token';
-
+import departments from '../../../service/departement/branches';
 function AddEditStudent(props) {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [loader, setLoaderStatus] = useState(false);
     const [open, setOpen] = useState(false);
+    const [branches, setBranches] = useState();
     const [formValues, setFormValues] = useState({
         title: '',
         firstName: '',
@@ -101,8 +102,14 @@ function AddEditStudent(props) {
             openSnackbar();
             // finally changing the loader status
             setLoaderStatus(false);
-        } 
+        }
     }
+
+
+    useEffect(() => {
+        const data = departments();
+        setBranches(data);
+    }, [])
 
     return (
         <div className="container-fluid">
@@ -210,10 +217,10 @@ function AddEditStudent(props) {
                             <FormControl variant="outlined" className="w-100 my-3" required>
                                 <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Current Studing Year</InputLabel>
                                 <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="currentStudingyear" label="Current Studing Year" >
-                                    <MenuItem value={1}>First Year</MenuItem>
-                                    <MenuItem value={2}>Second Year</MenuItem>
-                                    <MenuItem value={3}>Third Year</MenuItem>
-                                    <MenuItem value={4}>Fourth Year</MenuItem>
+                                    <MenuItem value={'First Year'}>First Year</MenuItem>
+                                    <MenuItem value={'Second Year'}>Second Year</MenuItem>
+                                    <MenuItem value={'Third Year'}>Third Year</MenuItem>
+                                    <MenuItem value={'Fourth Year'}>Fourth Year</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
@@ -233,8 +240,15 @@ function AddEditStudent(props) {
                             <FormControl variant="outlined" className="w-100 my-3" required>
                                 <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Branch</InputLabel>
                                 <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="branch" label="Branch" >
-                                    <MenuItem value={'it'}>Information Technology</MenuItem>
-                                    <MenuItem value={'cse'}>Computer Science</MenuItem>
+
+                                    {
+                                        branches?.map((x) => {
+                                            return (
+                                                <MenuItem key={x} value={x}>{x}</MenuItem>
+                                            );
+                                        })
+                                    }
+
                                 </Select>
                             </FormControl>
                         </div>

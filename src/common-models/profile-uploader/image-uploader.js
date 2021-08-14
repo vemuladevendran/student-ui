@@ -3,6 +3,7 @@ import ss from './image-uploader.module.css'
 // image uppload
 const ProfileUpload = () => {
     const defaultImageUrl = '/assets/default-profile.png'
+    const [imageFile, setImageFile] = useState();
     const [imageUpload, setImageUpload] = useState(defaultImageUrl);
     const imageInput = useRef();
     // open image selection
@@ -21,6 +22,7 @@ const ProfileUpload = () => {
     const handleImageChange = (event) => {
         // creating image previewurl
         const imageFile = event.target.files[0];
+        setImageFile(imageFile)
         const previewUrl = URL.createObjectURL(imageFile);
         setImageUpload(previewUrl)
     }
