@@ -29,6 +29,9 @@ import AddCircular from '../circular/add-circular';
 import CreateReport from '../report/create-report';
 import UpdatePassword from '../update-password/update-password';
 import Profile from '../profile/profile';
+import DepartmentSelectionForm from '../marks/department-selection-form/department-selection-form';
+import StudentListMarks from '../marks/student-list/student-list-mark';
+
 const drawerWidth = 240;
 
 //  app-shell styles
@@ -63,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
+        width: '100%'
     },
 }));
 
@@ -246,6 +250,12 @@ function ResponsiveDrawer(props) {
                     </Route>
                     <Route exact path='/profile'>
                         <Profile></Profile>
+                    </Route>
+                    <Route exact path='/marks-department-selection'>
+                        <DepartmentSelectionForm></DepartmentSelectionForm>
+                    </Route>
+                    <Route exact path='/studentlist-marks/:branch/:year/:examname'>
+                        <StudentListMarks></StudentListMarks>
                     </Route>
 
                     {
