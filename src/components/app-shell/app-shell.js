@@ -244,7 +244,7 @@ function ResponsiveDrawer(props) {
                     </Route>
                     <Route exact path='/create-report'>
                         <CreateReport></CreateReport>
-                    </Route>
+                        currentStudingyear      </Route>
                     <Route exact path='/update-password'>
                         <UpdatePassword></UpdatePassword>
                     </Route>
@@ -254,7 +254,7 @@ function ResponsiveDrawer(props) {
                     <Route exact path='/marks-department-selection'>
                         <DepartmentSelectionForm></DepartmentSelectionForm>
                     </Route>
-                    <Route exact path='/studentlist-marks/:branch/:year/:examname'>
+                    <Route exact path='/studentlist-marks/:branch/:currentStudingyear/:examname'>
                         <StudentListMarks></StudentListMarks>
                     </Route>
 

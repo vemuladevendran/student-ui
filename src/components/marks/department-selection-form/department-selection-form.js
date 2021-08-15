@@ -37,7 +37,7 @@ function DepartmentSelectionForm(props) {
     // handle form submit
     const handleSubmit = async (event) => {
         try {
-            props.history.push(`/studentlist-marks/${formValues.branch}/${formValues.year}/${formValues.examName}`)
+            props.history.push(`/studentlist-marks/${formValues.branch}/${formValues.currentStudingyear}/${formValues.examName}`)
         } catch (error) {
             console.error(error);
         }

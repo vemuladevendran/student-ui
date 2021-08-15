@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import AddMarks from "../add-marks/add-marks";
 
 
@@ -7,10 +8,9 @@ import AddMarks from "../add-marks/add-marks";
 
 function StudentListMarks(props) {
 
-    const tableData = Array(10).fill('');
 
     const [openAddMarks, setOpenAddMarks] = useState(false);
-
+    const [studentlist, setStudentList] = useState()
 
     const openAddMarksDialog = () => {
         setOpenAddMarks(true);
@@ -23,13 +23,13 @@ function StudentListMarks(props) {
 
     const getStudentData = async () => {
         try {
-            // console.log(props.match.params)
             const queryDetails = {
-                branch: 'Information Technology',
-                currentStudingyear: 'First Year',
+                branch: props.match.params.branch,
+                currentStudingyear: props.match.params.currentStudingyear,
             }
             const data = await axios.get(`http://localhost:3000/api/v1/student`, { params: queryDetails });
-            console.log(data);
+            console.log(data.data)
+            setStudentList(data.data);
         } catch (error) {
             console.error(error);
         }
@@ -57,13 +57,13 @@ function StudentListMarks(props) {
                         </thead>
                         <tbody>
                             {
-                                tableData?.map(x => {
+                                studentlist?.map((x, i)=> {
                                     return (
                                         <tr key={Math.random()}>
-                                            <th scope="row">1</th>
-                                            <td>2019PECIT248</td>
-                                            <td>211419205038</td>
-                                            <td>Devendran V</td>
+                                            <th scope="row">{i + 1}</th>
+                                            <td>{x?.rollNumber}</td>
+                                            <td>{x?.examNumber}</td>
+                                            <td>{`${x?.firstName} ${x?.lastName}`}</td>
                                             <td className="text-center">
                                                 <button type="button" className="btn btn-primary" onClick={openAddMarksDialog}>
                                                     <i className="bi bi-plus-circle-fill"></i> Add Marks
@@ -86,4 +86,4 @@ function StudentListMarks(props) {
 }
 
 
-export default StudentListMarks
+export default withRouter(StudentListMarks)
