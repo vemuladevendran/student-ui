@@ -13,7 +13,8 @@ function DepartmentSelectionForm(props) {
     const [formValues, setFormValues] = useState({
         branch: '',
         currentStudingyear: '',
-        examName:'',
+        semester: '',
+        examName: '',
     });
 
     // handle formvalue change
@@ -37,7 +38,7 @@ function DepartmentSelectionForm(props) {
     // handle form submit
     const handleSubmit = async (event) => {
         try {
-            props.history.push(`/studentlist-marks/${formValues.branch}/${formValues.currentStudingyear}/${formValues.examName}`)
+            props.history.push(`/studentlist-marks/${formValues.branch}/${formValues.currentStudingyear}/${formValues.semester}/${formValues.examName}`)
         } catch (error) {
             console.error(error);
         }
@@ -79,6 +80,25 @@ function DepartmentSelectionForm(props) {
                             <MenuItem value={'Second Year'}>Second Year</MenuItem>
                             <MenuItem value={'Third Year'}>Third Year</MenuItem>
                             <MenuItem value={'Fourth Year'}>Fourth Year</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <FormControl variant="outlined" className="w-100 my-3" required>
+                        <InputLabel id="demo-simple-select-outlined-label" className="bg-white px-2">select Semester</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            label="select year"
+                            name="semester"
+                            onChange={handleFormvaluechange}
+                        >
+                            <MenuItem value='1'>1</MenuItem>
+                            <MenuItem value='2'>2</MenuItem>
+                            <MenuItem value='3'>3</MenuItem>
+                            <MenuItem value='4'>4</MenuItem>
+                            <MenuItem value='5'>5</MenuItem>
+                            <MenuItem value='6'>6</MenuItem>
+                            <MenuItem value='7'>7</MenuItem>
+                            <MenuItem value='8'>8</MenuItem>
                         </Select>
                     </FormControl>
                     <TextField id="outlined-basic" label="Exam Name" onChange={handleFormvaluechange} name="examName" variant="outlined" className="w-100 my-3" required />

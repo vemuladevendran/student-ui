@@ -31,6 +31,7 @@ import UpdatePassword from '../update-password/update-password';
 import Profile from '../profile/profile';
 import DepartmentSelectionForm from '../marks/department-selection-form/department-selection-form';
 import StudentListMarks from '../marks/student-list/student-list-mark';
+import Marks from '../marks/marks';
 
 const drawerWidth = 240;
 
@@ -244,17 +245,20 @@ function ResponsiveDrawer(props) {
                     </Route>
                     <Route exact path='/create-report'>
                         <CreateReport></CreateReport>
-                        currentStudingyear      </Route>
+                    </Route>
                     <Route exact path='/update-password'>
                         <UpdatePassword></UpdatePassword>
                     </Route>
                     <Route exact path='/profile'>
                         <Profile></Profile>
                     </Route>
+                    <Route exact path='/marks'>
+                        <Marks></Marks>
+                    </Route>
                     <Route exact path='/marks-department-selection'>
                         <DepartmentSelectionForm></DepartmentSelectionForm>
                     </Route>
-                    <Route exact path='/studentlist-marks/:branch/:currentStudingyear/:examname'>
+                    <Route exact path='/studentlist-marks/:branch/:currentStudingyear/:semester/:examname'>
                         <StudentListMarks></StudentListMarks>
                     </Route>
 

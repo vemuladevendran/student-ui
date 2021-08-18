@@ -21,6 +21,7 @@ function AddEditStudent(props) {
     const [loader, setLoaderStatus] = useState(false);
     const [open, setOpen] = useState(false);
     const [branches, setBranches] = useState();
+    const [imageFile, setImageFile] = useState();
     const [formValues, setFormValues] = useState({
         title: '',
         firstName: '',
@@ -82,12 +83,19 @@ function AddEditStudent(props) {
             // changing loader status
             setLoaderStatus(true);
             //  sending Ajax call
-            const data = formValues;
-            console.log(data);
+
+            // changing image file into formdata
+
+            const formData = new FormData();
+            Object.keys(formValues).forEach(key => formData.append(key, formData[key]))
+           formData.append('photo', imageFile);
+
+
+           console.log(formData);
             const token = TokenServe.getToken();
             const payload = TokenServe.getTokenPayloadData(token);
             const userId = payload.id;
-            await axios.post(`http://localhost:3000/api/v1/student/${userId}`, data);
+            await axios.post(`http://localhost:3000/api/v1/student/${userId}`, formData);
             // finally changing the loader status
             setLoaderStatus(false);
             const result = await Swal.fire('New Student Added Successfuly');
@@ -137,7 +145,7 @@ function AddEditStudent(props) {
                         </div>
                         <div className="col-12 col-md-6 col-lg-4 text-center">
                             {/* image upload */}
-                            <ProfileUpload></ProfileUpload>
+                            <ProfileUpload onImgaeSelection={(e) => { setImageFile(e) }}></ProfileUpload>
                         </div>
                     </div>
                     {/* email details */}

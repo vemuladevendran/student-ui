@@ -6,6 +6,7 @@ export const menuItems = [
     ['person_add', 'Add Student', '/students/add-student', 'all'],
     ['dashboard', 'Users', '/users', 'admin'],
     ['group_add', 'Add User', '/users/add-user', 'admin'],
+    ['list', 'Marks', '/marks', 'all'],
     ['assignment', 'Create Circular', '/add-circular', 'all'],
     ['bug_report', 'Create Report', '/create-report', 'all'],
     ['phonelink_lock', 'Update Password', '/update-password', 'all'],
