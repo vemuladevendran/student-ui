@@ -237,6 +237,9 @@ function ResponsiveDrawer(props) {
                     <Route exact path='/students/add-student'>
                         <AddEditStudent></AddEditStudent>
                     </Route>
+                    <Route exact path='/students/edit-student/:id'>
+                        <AddEditStudent></AddEditStudent>
+                    </Route>
                     <Route exact path='/students/view-student/:id'>
                         <ViewStudent></ViewStudent>
                     </Route>

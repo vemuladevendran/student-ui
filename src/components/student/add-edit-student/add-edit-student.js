@@ -88,13 +88,20 @@ function AddEditStudent(props) {
 
             const formData = new FormData();
             Object.keys(formValues).forEach(key => formData.append(key, formValues[key]))
-           formData.append('photo', imageFile);
+            formData.append('photo', imageFile);
 
-
-           console.log(formData);
             const token = TokenServe.getToken();
             const payload = TokenServe.getTokenPayloadData(token);
             const userId = payload.id;
+            const studentId = props?.match?.params?.id;
+            if (studentId) {
+                await axios.put(`http://localhost:3000/api/v1/student/${studentId}`, formData);
+                setLoaderStatus(false);
+                const result = await Swal.fire('Student Updated Successfuly');
+                if (result.isConfirmed) {
+                    return props.history.push('/students')
+                }
+            }
             await axios.post(`http://localhost:3000/api/v1/student/${userId}`, formData);
             // finally changing the loader status
             setLoaderStatus(false);
@@ -113,10 +120,37 @@ function AddEditStudent(props) {
         }
     }
 
+    // getting update student details
+
+    const getFormData = async () => {
+        try {
+            // changing loader status
+            setLoaderStatus(true);
+            const studentId = props?.match?.params?.id;
+            const student = await axios.get(`http://localhost:3000/api/v1/student/${studentId}`);
+            setLoaderStatus(false);
+            setFormValues(student.data);
+            console.log(student.data)
+        } catch (error) {
+            //  showing error message
+            const errorMessage = error?.response.data.message;
+            console.error(errorMessage)
+            setErrorMessage(errorMessage);
+            openSnackbar();
+            // finally changing the loader status
+            setLoaderStatus(false);
+        }
+    }
+
 
     useEffect(() => {
         const data = departments();
         setBranches(data);
+        // checking add or edit form
+        const id = props?.match?.params?.id;
+        if (id !== undefined) {
+            getFormData();
+        }
     }, [])
 
     return (
@@ -135,28 +169,28 @@ function AddEditStudent(props) {
                         <div className="col-12 col-md-6 col-lg-8">
                             <FormControl variant="outlined" className="w-100 my-3" required>
                                 <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Title</InputLabel>
-                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="title" label="Title" >
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" value={formValues?.title} onChange={handleFormvaluechange} name="title" label="Title" >
                                     <MenuItem value='Mr'>Mr</MenuItem>
                                     <MenuItem value='Mrs'>Mrs</MenuItem>
                                 </Select>
                             </FormControl>
-                            <TextField id="outlined-basic" label="First Name" onChange={handleFormvaluechange} name="firstName" variant="outlined" className="w-100 my-3" required />
-                            <TextField id="outlined-basic" label="Last Name" onChange={handleFormvaluechange} name="lastName" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" label="First Name" onChange={handleFormvaluechange} name="firstName" variant="outlined" value={formValues?.firstName} className="w-100 my-3" required />
+                            <TextField id="outlined-basic" label="Last Name" onChange={handleFormvaluechange} name="lastName" variant="outlined" value={formValues?.lastName} className="w-100 my-3" required />
                         </div>
                         <div className="col-12 col-md-6 col-lg-4 text-center">
                             {/* image upload */}
-                            <ProfileUpload onImgaeSelection={(e) => { setImageFile(e) }}></ProfileUpload>
+                            <ProfileUpload onImgaeSelection={(e) => { setImageFile(e) }} imageUrl={formValues?.photo}></ProfileUpload>
                         </div>
                     </div>
                     {/* email details */}
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" label="email" onChange={handleFormvaluechange} name="email" type="email" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" label="email" onChange={handleFormvaluechange} name="email" type="email" variant="outlined" value={formValues?.email} className="w-100 my-3" required />
                         </div>
                         <div className="col-12 col-md-6">
                             <FormControl variant="outlined" className="w-100 my-3" required>
                                 <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Gender</InputLabel>
-                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="gender" label="Gender" >
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" value={formValues?.gender} onChange={handleFormvaluechange} name="gender" label="Gender" >
                                     <MenuItem value={'male'}>Male</MenuItem>
                                     <MenuItem value={'female'}>Female</MenuItem>
                                 </Select>
@@ -166,24 +200,24 @@ function AddEditStudent(props) {
                     {/* data of bith */}
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" label="DOB" onChange={handleFormvaluechange} name="dob" type="date" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" label="DOB" onChange={handleFormvaluechange} name="dob" type="date" variant="outlined" value={formValues?.dob} className="w-100 my-3" required />
                         </div>
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" label="Mobile" type="tel" onChange={handleFormvaluechange} name="mobileNumber" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" label="Mobile" type="tel" onChange={handleFormvaluechange} name="mobileNumber" variant="outlined" value={formValues?.mobileNumber} className="w-100 my-3" required />
                         </div>
                     </div>
                     {/* family details */}
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" label="Father's Name" onChange={handleFormvaluechange} name="fatherName" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" label="Father's Name" onChange={handleFormvaluechange} name="fatherName" variant="outlined" value={formValues?.fatherName} className="w-100 my-3" required />
                         </div>
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" label="Mothers's Name" onChange={handleFormvaluechange} name="motherName" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" label="Mothers's Name" onChange={handleFormvaluechange} name="motherName" variant="outlined" value={formValues?.motherName} className="w-100 my-3" required />
                         </div>
                     </div>
                     {/* address */}
                     <div className="col-12">
-                        <textarea placeholder="Address" onChange={handleFormvaluechange} name="address" className="w-100 my-3" style={{ height: '70px' }} required />
+                        <textarea placeholder="Address" value={formValues?.address} onChange={handleFormvaluechange} name="address" className="w-100 my-3" style={{ height: '70px' }} required />
                     </div>
                 </section>
                 {/* education details */}
@@ -192,39 +226,39 @@ function AddEditStudent(props) {
                     {/* school details */}
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 1000, max: new Date().getFullYear() } }} label="Year of 10th" onChange={handleFormvaluechange} name="yearOf10" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" type="number" value={formValues?.yearOf10} InputProps={{ inputProps: { min: 1000, max: new Date().getFullYear() } }} label="Year of 10th" onChange={handleFormvaluechange} name="yearOf10" variant="outlined" className="w-100 my-3" required />
                         </div>
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 1000, max: new Date().getFullYear() } }} label="Year of 12th" onChange={handleFormvaluechange} name="yearOf12" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" type="number" value={formValues?.yearOf12} InputProps={{ inputProps: { min: 1000, max: new Date().getFullYear() } }} label="Year of 12th" onChange={handleFormvaluechange} name="yearOf12" variant="outlined" className="w-100 my-3" required />
                         </div>
                     </div>
                     {/* marks details */}
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 1, max: 100 } }} label="10th marks percentage" onChange={handleFormvaluechange} name="markPercentageOf10" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 1, max: 100 } }} label="10th marks percentage" onChange={handleFormvaluechange} name="markPercentageOf10" value={formValues?.markPercentageOf10} variant="outlined" className="w-100 my-3" required />
                         </div>
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 1, max: 100 } }} label="12th marks percentage" onChange={handleFormvaluechange} name="markPercentageOf12" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 1, max: 100 } }} label="12th marks percentage" onChange={handleFormvaluechange} name="markPercentageOf12" value={formValues?.markPercentageOf12} variant="outlined" className="w-100 my-3" required />
                         </div>
                     </div>
                     {/* school name */}
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" label="10th School Name" onChange={handleFormvaluechange} name="nameOf10School" variant="outlined" className="w-100 my-3" />
+                            <TextField id="outlined-basic" label="10th School Name" onChange={handleFormvaluechange} name="nameOf10School" value={formValues?.nameOf10School} variant="outlined" className="w-100 my-3" />
                         </div>
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" label="12th School Name" onChange={handleFormvaluechange} name="nameOf12School" variant="outlined" className="w-100 my-3" />
+                            <TextField id="outlined-basic" label="12th School Name" onChange={handleFormvaluechange} name="nameOf12School" value={formValues?.nameOf12School} variant="outlined" className="w-100 my-3" />
                         </div>
                     </div>
                     <h4>College Details</h4>
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" label="Year of college joined" onChange={handleFormvaluechange} name="yearOfCollegeJoined" type="number" InputProps={{ inputProps: { min: 1000, max: new Date().getFullYear() } }} variant="outlined" className="w-100 my-3" />
+                            <TextField id="outlined-basic" label="Year of college joined" onChange={handleFormvaluechange} name="yearOfCollegeJoined" value={formValues?.yearOfCollegeJoined} type="number" InputProps={{ inputProps: { min: 1000, max: new Date().getFullYear() } }} variant="outlined" className="w-100 my-3" />
                         </div>
                         <div className="col-12 col-md-6">
                             <FormControl variant="outlined" className="w-100 my-3" required>
                                 <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Current Studing Year</InputLabel>
-                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="currentStudingyear" label="Current Studing Year" >
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="currentStudingyear" value={formValues?.currentStudingyear} label="Current Studing Year" >
                                     <MenuItem value={'First Year'}>First Year</MenuItem>
                                     <MenuItem value={'Second Year'}>Second Year</MenuItem>
                                     <MenuItem value={'Third Year'}>Third Year</MenuItem>
@@ -236,10 +270,10 @@ function AddEditStudent(props) {
                     {/* roll number details */}
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" label="Roll Number" onChange={handleFormvaluechange} name="rollNumber" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" label="Roll Number" onChange={handleFormvaluechange} name="rollNumber" value={formValues?.rollNumber} variant="outlined" className="w-100 my-3" required />
                         </div>
                         <div className="col-12 col-md-6">
-                            <TextField id="outlined-basic" label="Exam Number" onChange={handleFormvaluechange} name="examNumber" variant="outlined" className="w-100 my-3" required />
+                            <TextField id="outlined-basic" label="Exam Number" onChange={handleFormvaluechange} name="examNumber" value={formValues?.examNumber} variant="outlined" className="w-100 my-3" required />
                         </div>
                     </div>
                     {/* branch details */}
@@ -247,7 +281,7 @@ function AddEditStudent(props) {
                         <div className="col-12 col-md-6">
                             <FormControl variant="outlined" className="w-100 my-3" required>
                                 <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Branch</InputLabel>
-                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="branch" label="Branch" >
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="branch" value={formValues?.branch} label="Branch" >
 
                                     {
                                         branches?.map((x) => {
@@ -263,7 +297,7 @@ function AddEditStudent(props) {
                         <div className="col-12 col-md-6">
                             <FormControl variant="outlined" className="w-100 my-3" required>
                                 <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Section</InputLabel>
-                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="section" label="Section" >
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="section" value={formValues?.section} label="Section" >
                                     <MenuItem value={"a"}>A</MenuItem>
                                     <MenuItem value={"b"}>B</MenuItem>
                                     <MenuItem value={"c"}>C</MenuItem>

@@ -36,7 +36,7 @@ function ViewStudent(props) {
         if (result.isConfirmed) {
             try {
                 await axios.delete(`http://localhost:3000/api/v1/student/${id}`)
-                getStudentDetails();
+                props.history.goBack();
             } catch (error) {
                 console.log(error, 'fail to delete');
 
@@ -106,7 +106,9 @@ function ViewStudent(props) {
                                 <button type="button" className="btn btn-warning">Report</button>
                                 {
                                     isAdmin === 'true' ? (
-                                        <button type="button" className="btn btn-danger" onClick={deleteStudent}>Delete</button>
+                                        <button type="button" className="btn btn-danger" onClick={
+                                            () => { deleteStudent(student?.id) }
+                                        }>Delete</button>
                                     ) : null
                                 }
                             </div>

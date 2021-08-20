@@ -1,4 +1,4 @@
-import { React, useRef, useState } from 'react';
+import { React, useEffect, useRef, useState } from 'react';
 import ss from './image-uploader.module.css'
 // image uppload
 const ProfileUpload = (props) => {
@@ -8,11 +8,18 @@ const ProfileUpload = (props) => {
     const imageInput = useRef();
     // open image selection
     const openImageSelection = (event) => {
+
         // checking image selected or not and setting default image
         if (imageUpload !== defaultImageUrl) {
-            setImageUpload(defaultImageUrl);
-            return;
+            if (props?.imageUrl) {
+                setImageUpload(defaultImageUrl);
+                return;
+            }
         }
+
+
+
+
         // triggering input element
         imageInput.current.click()
     }
@@ -27,6 +34,10 @@ const ProfileUpload = (props) => {
         const previewUrl = URL.createObjectURL(imageFile);
         setImageUpload(previewUrl)
     }
+
+    useEffect(() => {
+        setImageUpload(props?.imageUrl);
+    }, [])
     return (
         <div>
             <input className="d-none" name="profileImage" onChange={handleImageChange} ref={imageInput} type="file" />

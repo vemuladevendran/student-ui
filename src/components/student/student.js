@@ -121,8 +121,8 @@ export default function Students() {
                             students?.map((x, i) => {
                                 return (
                                     <div key={i} className="card m-1" style={{ width: '17rem' }}>
-                                        <div style={{ maxHeight: '21rem' }}>
-                                            <img src="/assets/photo.jpeg" className="card-img-top mw-100 mh-100" loading="lazy" decoding="async" alt="..." />
+                                        <div style={{ maxHeight: '21rem', minHeight: '18.5rem' }}>
+                                            <img src={x?.photo || "/assets/photo.jpeg" }className="card-img-top mw-100 mh-100" loading="lazy" decoding="async" alt="..." />
                                         </div>
                                         <div className="card-body">
                                             <h5 className="card-title">{x?.firstName}</h5>
@@ -134,7 +134,7 @@ export default function Students() {
                                             <div className="d-flex justify-content-between">
                                                 <NavLink to={`students/view-student/${x.id}`} className="btn btn-primary">View Details</NavLink>
                                                 <div>
-                                                    <button type="button" className="btn btn-secondary mx-1"><i className="bi bi-pen-fill"></i></button>
+                                                    <NavLink to={`/students/edit-student/${x.id}`} type="button" className="btn btn-secondary mx-1"><i className="bi bi-pen-fill"></i></NavLink>
                                                     {
                                                         isAdmin === 'true' ? (
                                                             <button type="button" className="btn btn-danger" onClick={() => {
