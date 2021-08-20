@@ -87,7 +87,7 @@ function AddEditStudent(props) {
             // changing image file into formdata
 
             const formData = new FormData();
-            Object.keys(formValues).forEach(key => formData.append(key, formData[key]))
+            Object.keys(formValues).forEach(key => formData.append(key, formValues[key]))
            formData.append('photo', imageFile);
 
 

@@ -87,7 +87,7 @@ function CreateReport(props) {
                     <TextField id="outlined-basic" label="Report Title" onChange={handleFormvaluechange} name="reportTitle" variant="outlined" className="w-100 my-3" required />
                     <TextField id="outlined-basic" label="Report Date" onChange={handleFormvaluechange} name="reportDate" type="date" variant="outlined" className="w-100 my-3" required />
                     <TextField id="outlined-basic" label="Student RollNumber" onChange={handleFormvaluechange} name="studentRollNumber" variant="outlined" className="w-100 my-3" required />
-                    <textarea placeholder="Address" onChange={handleFormvaluechange} name="reportContent" className="w-100 my-3" style={{ height: '100px' }} required />
+                    <textarea placeholder="Report content" onChange={handleFormvaluechange} name="reportContent" className="w-100 my-3" style={{ height: '100px' }} required />
                     {/* button section */}
                     <div className="d-md-flex justify-content-center">
                         <div className="m-2">

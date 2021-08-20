@@ -8,27 +8,41 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { NavLink } from 'react-router-dom';
 import TokenServe from '../../service/token';
 import departments from '../../service/departement/branches';
+import axios from 'axios';
 
 export default function Students() {
     const [branches, setBranches] = useState();
     const [isAdmin, setIsAdmin] = useState();
-
+    const [students, setStudents] = useState();
     // getting token data
     const getTokenData = () => {
         const token = TokenServe.getToken();
         return (TokenServe.getTokenPayloadData(token));
     }
 
-    useEffect(() => {
-        const data = getTokenData();
-        setIsAdmin(data.isAdmin);
+    // get students
 
+    const getStudents = async () => {
+        try {
+            const students = await axios.get(`http://localhost:3000/api/v1/student`);
+            setStudents(students.data);
+            console.log(students.data)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        const tokenData = getTokenData();
+        setIsAdmin(tokenData.isAdmin);
+        const branches = departments();
+        setBranches(branches);
+        getStudents();
     }, []);
 
-    const students = Array(5).fill('');
 
     // delete student
-    const deleteStudent = async () => {
+    const deleteStudent = async (id) => {
         const result = await Swal.fire({
             title: 'Are you sure?',
             text: 'You won\'t be able to revert this!',
@@ -41,22 +55,14 @@ export default function Students() {
 
         if (result.isConfirmed) {
             try {
-
-
+                await axios.delete(`http://localhost:3000/api/v1/student/${id}`)
+                getStudents();
             } catch (error) {
                 console.log(error, 'fail to delete');
 
             }
         }
     }
-
-
-    useEffect(() => {
-        const data = departments();
-        setBranches(data);
-    }, [])
-
-
 
     return (
         <div className="container-fluid">
@@ -95,7 +101,7 @@ export default function Students() {
                                 <Select
                                     labelId="demo-simple-select-outlined-label"
                                     id="demo-simple-select-outlined"
-                                    label="BRANCH"
+                                    label="year"
                                 >
                                     <MenuItem value="">
                                         <em>All</em>
@@ -112,26 +118,28 @@ export default function Students() {
                     {/* students cards */}
                     <div className="row justify-content-center  justify-content-md-start">
                         {
-                            students.map((x, i) => {
+                            students?.map((x, i) => {
                                 return (
                                     <div key={i} className="card m-1" style={{ width: '17rem' }}>
                                         <div style={{ maxHeight: '21rem' }}>
                                             <img src="/assets/photo.jpeg" className="card-img-top mw-100 mh-100" loading="lazy" decoding="async" alt="..." />
                                         </div>
                                         <div className="card-body">
-                                            <h5 className="card-title">Devendran</h5>
-                                            <p>(INFORMATION TECHNOLOGY)</p>
+                                            <h5 className="card-title">{x?.firstName}</h5>
+                                            <p>({x?.branch})</p>
                                             <div className="card-text">
-                                                <p>Roll No: <span>2019PECIT248</span></p>
-                                                <p>Exam No: <span>211419205038</span></p>
+                                                <p>Roll No: <span>{x?.rollNumber}</span></p>
+                                                <p>Exam No: <span>{x?.examNumber}</span></p>
                                             </div>
                                             <div className="d-flex justify-content-between">
-                                                <NavLink to="students/view-student" className="btn btn-primary">View Details</NavLink>
+                                                <NavLink to={`students/view-student/${x.id}`} className="btn btn-primary">View Details</NavLink>
                                                 <div>
                                                     <button type="button" className="btn btn-secondary mx-1"><i className="bi bi-pen-fill"></i></button>
                                                     {
                                                         isAdmin === 'true' ? (
-                                                            <button type="button" className="btn btn-danger" onClick={deleteStudent}><i className="bi bi-trash-fill"></i></button>
+                                                            <button type="button" className="btn btn-danger" onClick={() => {
+                                                                deleteStudent(x?.id)
+                                                            }}><i className="bi bi-trash-fill"></i></button>
                                                         ) : null
                                                     }
                                                 </div>
