@@ -21,7 +21,7 @@ function AddMarks(props) {
                                 return (
                                     <div key={Math.random()} className="d-flex align-items-center">
                                         <span className="fw-bold me-2">Maths</span>
-                                        <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 0, max: 100 } }} label="Enter marks" name="" variant="outlined" className="w-100 my-3" required />
+                                        27/08                           <TextField id="outlined-basic" type="number" InputProps={{ inputProps: { min: 0, max: 100 } }} label="Enter marks" name="" variant="outlined" className="w-100 my-3" required />
                                     </div>
                                 );
                             })

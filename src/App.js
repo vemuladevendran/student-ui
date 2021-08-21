@@ -6,7 +6,7 @@ import ResetPassword from './components/forget-password/reset-password/reset-pas
 import AppShell from './components/app-shell/app-shell'
 import { init } from './service/auth/auth-token';
 import { useState } from 'react';
-import TokenServe from './service/token'
+import TokenServe from './service/token/token'
 init();
 
 

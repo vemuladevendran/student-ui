@@ -6,7 +6,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { NavLink } from 'react-router-dom';
-import TokenServe from '../../service/token';
+import TokenServe from '../../service/token/token';
 import departments from '../../service/departement/branches';
 import axios from 'axios';
 
@@ -14,6 +14,9 @@ export default function Students() {
     const [branches, setBranches] = useState();
     const [isAdmin, setIsAdmin] = useState();
     const [students, setStudents] = useState();
+    const [circular, setCirculars] = useState();
+    const report = Array(10).fill('');
+
     // getting token data
     const getTokenData = () => {
         const token = TokenServe.getToken();
@@ -32,12 +35,25 @@ export default function Students() {
         }
     }
 
+    // get circulars
+
+    const getCirculars = async () => {
+        try {
+            const data = await axios.get('http://localhost:3000/api/v1/circular')
+            setCirculars(data.data)
+            console.log(data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         const tokenData = getTokenData();
         setIsAdmin(tokenData.isAdmin);
         const branches = departments();
         setBranches(branches);
         getStudents();
+        getCirculars();
     }, []);
 
 
@@ -122,7 +138,7 @@ export default function Students() {
                                 return (
                                     <div key={i} className="card m-1" style={{ width: '17rem' }}>
                                         <div style={{ maxHeight: '21rem', minHeight: '18.5rem' }}>
-                                            <img src={x?.photo || "/assets/photo.jpeg" }className="card-img-top mw-100 mh-100" loading="lazy" decoding="async" alt="..." />
+                                            <img src={x?.photo || "/assets/photo.jpeg"} className="card-img-top mw-100 mh-100" loading="lazy" decoding="async" alt="..." />
                                         </div>
                                         <div className="card-body">
                                             <h5 className="card-title">{x?.firstName}</h5>
@@ -152,9 +168,40 @@ export default function Students() {
                     </div>
                 </div>
                 {/* graph */}
-                <div className="col-12 col-lg-3 d-none d-lg-block">
-                    <img src="/assets/graph-1.webp" className="card-img-top w-100" alt="..." />
-                    <img src="/assets/graph-2.png" className="card-img-top w-100" alt="..." />
+                <div className="col-12 col-lg-3 d-none d-lg-block vh-100 border-start">
+                    {/* circular list */}
+                    <div className="overflow-auto h-50">
+                        <h4 className="fw-bold">CIRCULARS</h4>
+                        {
+                            circular?.map(x => {
+                                return (
+                                    <div key={Math.random()} className='p-2 shadow-sm rounded m-3'>
+                                        <h4>{x.circularTitle}</h4>
+                                        <p className={`${ss.report_content}`}>
+                                            {x.circularContent}
+                                        </p>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    <hr></hr>
+                    {/* roport list */}
+                    <div className="overflow-auto h-50">
+                        <h4 className="fw-bold">REPORTS</h4>
+                        {
+                            report?.map(x => {
+                                return (
+                                    <div key={Math.random()} className='p-2 shadow-sm rounded m-3'>
+                                        <h3>Title</h3>
+                                        <p className={`${ss.report_content}`}>
+                                            hbsdjdcbjdbjcbdjjahbbbbbbbbbbbbbbbbbbbbbbbbbb
+                                        </p>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             </div>
 

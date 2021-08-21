@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Loader from '../loader/loader';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
-import TokenServe from '../../service/token';
+import TokenServe from '../../service/token/token';
 
 
 

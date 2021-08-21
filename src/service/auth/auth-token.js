@@ -1,5 +1,5 @@
 import axios from 'axios';
-import TokenServe from '../token';
+import TokenServe from '../token/token';
 
 // Add a request interceptor
 export const init = () => {

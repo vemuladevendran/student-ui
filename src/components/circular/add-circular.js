@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
 import departments from '../../service/departement/branches';
-
+import TokenServe from '../../service/token/token'
 
 function AddCircular(props) {
     const [errorMessage, setErrorMessage] = useState('');
@@ -65,7 +65,10 @@ function AddCircular(props) {
 
             const data = formValues;
             console.log(data);
-            await axios.post('http://localhost:3000/api/v1/circular', data);
+            const token = TokenServe.getToken();
+            const payload = TokenServe.getTokenPayloadData(token);
+            const userId = payload.id;
+            await axios.post('http://localhost:3000/api/v1/circular', data, { params: { id: userId } });
             const result = await Swal.fire('New Circular Added Successfuly');
             setLoaderStatus(false);
             if (result.isConfirmed) {
@@ -73,7 +76,7 @@ function AddCircular(props) {
             }
         } catch (error) {
             //  showing error message
-            const errorMessage = error?.response.data.message;
+            const errorMessage = error?.response.data;
             setErrorMessage(errorMessage);
             openSnackbar();
             setLoaderStatus(false);
@@ -110,7 +113,7 @@ function AddCircular(props) {
                             }
                         </Select>
                     </FormControl>
-                    <textarea placeholder="Address" onChange={handleFormvaluechange} name="circularContent" className="w-100 my-3" style={{ height: '100px' }} required />
+                    <textarea placeholder="Circular Content" onChange={handleFormvaluechange} name="circularContent" className="w-100 my-3" style={{ height: '100px' }} required />
                     {/* button section */}
                     <div className="d-md-flex justify-content-center">
                         <div className="m-2">

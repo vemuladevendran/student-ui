@@ -19,7 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { menuItems } from './sidenav-menu';
 import { NavLink, Redirect, Route, Switch } from 'react-router-dom'
-import TokenServe from '../../service/token';
+import TokenServe from '../../service/token/token';
 import Students from '../student/student';
 import AddEditStudent from '../student/add-edit-student/add-edit-student';
 import ViewStudent from '../student/view-student/view-student';

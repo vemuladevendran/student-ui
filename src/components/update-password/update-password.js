@@ -12,7 +12,7 @@ import Loader from '../loader/loader';
 import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
-import TokenServe from '../../service/token';
+import TokenServe from '../../service/token/token';
 
 function UpdatePassword(props) {
 

@@ -6,7 +6,7 @@ import Loader from '../../loader/loader';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
-import TokenServe from '../../../service/token';
+import TokenServe from '../../../service/token/token';
 
 function ViewStudent(props) {
     const [errorMessage, setErrorMessage] = useState('');
