@@ -91,14 +91,14 @@ function DepartmentSelectionForm(props) {
                             name="semester"
                             onChange={handleFormvaluechange}
                         >
-                            <MenuItem value='1'>1</MenuItem>
-                            <MenuItem value='2'>2</MenuItem>
-                            <MenuItem value='3'>3</MenuItem>
-                            <MenuItem value='4'>4</MenuItem>
-                            <MenuItem value='5'>5</MenuItem>
-                            <MenuItem value='6'>6</MenuItem>
-                            <MenuItem value='7'>7</MenuItem>
-                            <MenuItem value='8'>8</MenuItem>
+                            <MenuItem value='FirstSemester'>1</MenuItem>
+                            <MenuItem value='SecondSemester'>2</MenuItem>
+                            <MenuItem value='ThirdSemester'>3</MenuItem>
+                            <MenuItem value='FourthSemester'>4</MenuItem>
+                            <MenuItem value='FifthSemester'>5</MenuItem>
+                            <MenuItem value='SixthSemester'>6</MenuItem>
+                            <MenuItem value='SeventhSemester'>7</MenuItem>
+                            <MenuItem value='EightSemester'>8</MenuItem>
                         </Select>
                     </FormControl>
                     <TextField id="outlined-basic" label="Exam Name" onChange={handleFormvaluechange} name="examName" variant="outlined" className="w-100 my-3" required />

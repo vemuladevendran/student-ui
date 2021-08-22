@@ -11,8 +11,21 @@ function StudentListMarks(props) {
 
     const [openAddMarks, setOpenAddMarks] = useState(false);
     const [studentlist, setStudentList] = useState()
+    const [filterdetails, setFilterDetails] = useState();
+    const [selectedStudent, setSelectedStudent] = useState();
+    const [subjects, setSubjects] = useState();
+    const getSubjects = async () => {
+        try {
+            const data = await axios.get(`http://localhost:3000/api/v1/subjects/${props.match.params.branch}/${props.match.params.semester}`);
+            console.log(data.data);
+            setSubjects(data?.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
-    const openAddMarksDialog = () => {
+    const openAddMarksDialog = (student) => {
+        setSelectedStudent(student);
         setOpenAddMarks(true);
     }
 
@@ -23,10 +36,15 @@ function StudentListMarks(props) {
 
     const getStudentData = async () => {
         try {
+
+
             const queryDetails = {
                 branch: props.match.params.branch,
                 currentStudingyear: props.match.params.currentStudingyear,
+                semester: props.match.params.semester
             }
+            setFilterDetails(queryDetails);
+
             const data = await axios.get(`http://localhost:3000/api/v1/student`, { params: queryDetails });
             console.log(data.data)
             setStudentList(data.data);
@@ -38,6 +56,7 @@ function StudentListMarks(props) {
 
     useEffect(() => {
         getStudentData();
+        getSubjects();
     }, [])
 
 
@@ -57,28 +76,35 @@ function StudentListMarks(props) {
                         </thead>
                         <tbody>
                             {
-                                studentlist?.map((x, i)=> {
-                                    return (
-                                        <tr key={Math.random()}>
-                                            <th scope="row">{i + 1}</th>
-                                            <td>{x?.rollNumber}</td>
-                                            <td>{x?.examNumber}</td>
-                                            <td>{`${x?.firstName} ${x?.lastName}`}</td>
-                                            <td className="text-center">
-                                                <button type="button" className="btn btn-primary" onClick={openAddMarksDialog}>
-                                                    <i className="bi bi-plus-circle-fill"></i> Add Marks
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })
+                                studentlist?.length !== 0 ? (
+                                    studentlist?.map((x, i) => {
+                                        return (
+                                            <tr key={Math.random()}>
+                                                <th scope="row">{i + 1}</th>
+                                                <td>{x?.rollNumber}</td>
+                                                <td>{x?.examNumber}</td>
+                                                <td>{`${x?.firstName} ${x?.lastName}`}</td>
+                                                <td className="text-center">
+                                                    <button type="button" className="btn btn-primary" onClick={() => {
+                                                        openAddMarksDialog(x)
+                                                    }}>
+                                                        <i className="bi bi-plus-circle-fill"></i> Add Marks
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })
+                                ) : null
                             }
                         </tbody>
                     </table>
                 </div>
                 {/* add marks dialog */}
                 <div>
-                    <AddMarks open={openAddMarks} closeModal={closeModal} ></AddMarks>
+                    {
+
+                        studentlist?.length !== 0 ? (<AddMarks open={openAddMarks} closeModal={closeModal} filterdetails={filterdetails} student={selectedStudent} subjects={subjects}></AddMarks>) : null
+                    }
                 </div>
             </div>
         </div>

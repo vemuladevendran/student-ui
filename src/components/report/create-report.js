@@ -7,7 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
-
+import TokenServe from '../../service/token/token'
 
 
 function CreateReport(props) {
@@ -60,7 +60,10 @@ function CreateReport(props) {
 
             const data = formValues;
             console.log(data);
-            await axios.post('http://localhost:3000/api/v1/report', data);
+            const token = TokenServe.getToken();
+            const payload = TokenServe.getTokenPayloadData(token);
+            const userId = payload.id;
+            await axios.post('http://localhost:3000/api/v1/report', data, {params: {id : userId}});
             const result = await Swal.fire('New Report Created');
             setLoaderStatus(false);
             if (result.isConfirmed) {
