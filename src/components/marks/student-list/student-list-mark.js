@@ -50,12 +50,12 @@ function StudentListMarks(props) {
 
             const queryDetails = {
                 branch: props.match.params.branch,
-                currentStudingyear: props.match.params.currentStudingyear,
+                currentStudingYear: props.match.params.currentStudingYear,
                 semester: props.match.params.semester
             }
             setFilterDetails(queryDetails);
 
-            const data = await axios.get(`http://localhost:3000/api/v1/student/${queryDetails.branch}/${queryDetails.currentStudingyear}`);
+            const data = await axios.get(`http://localhost:3000/api/v1/student/${queryDetails.branch}/${queryDetails.currentStudingYear}`);
             setStudentList(data.data);
         } catch (error) {
             console.error(error);

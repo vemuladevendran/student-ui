@@ -180,7 +180,7 @@ function ViewStudent(props) {
                         Year of college Joined : <span className="text-info">{student?.yearOfCollegeJoined}</span>
                     </p>
                     <p className="h5 fw-bold mt-4">
-                        Current Studing Year : <span className="text-info">{student?.currentStudingyear}</span>
+                        Current Studing Year : <span className="text-info">{student?.currentStudingYear}</span>
                     </p>
                     <p className="h5 fw-bold mt-4">
                         Roll Number : <span className="text-info">{student?.rollNumber}</span>

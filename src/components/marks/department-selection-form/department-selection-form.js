@@ -12,7 +12,7 @@ function DepartmentSelectionForm(props) {
     const [branches, setBranches] = useState();
     const [formValues, setFormValues] = useState({
         branch: '',
-        currentStudingyear: '',
+        currentStudingYear: '',
         semester: '',
         examName: '',
     });
@@ -38,7 +38,7 @@ function DepartmentSelectionForm(props) {
     // handle form submit
     const handleSubmit = async (event) => {
         try {
-            props.history.push(`/studentlist-marks/${formValues.branch}/${formValues.currentStudingyear}/${formValues.semester}/${formValues.examName}`)
+            props.history.push(`/studentlist-marks/${formValues.branch}/${formValues.currentStudingYear}/${formValues.semester}/${formValues.examName}`)
         } catch (error) {
             console.error(error);
         }
@@ -73,7 +73,7 @@ function DepartmentSelectionForm(props) {
                             labelId="demo-simple-select-outlined-label"
                             id="demo-simple-select-outlined"
                             label="select year"
-                            name="currentStudingyear"
+                            name="currentStudingYear"
                             onChange={handleFormvaluechange}
                         >
                             <MenuItem value={'First Year'}>First Year</MenuItem>

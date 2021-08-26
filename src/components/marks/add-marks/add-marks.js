@@ -14,7 +14,7 @@ function AddMarks(props) {
         examNumber : selectedStudent?.examNumber,
         section : selectedStudent?.section,
         branch : selectedStudent?.branch,
-        currentStudingyear : selectedStudent?.currentStudingyear,
+        currentStudingYear : selectedStudent?.currentStudingYear,
         marks : {},
     });
 
