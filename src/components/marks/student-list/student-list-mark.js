@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import AddMarks from "../add-marks/add-marks";
-
+import CommonAlert from "../../../common-models/common-alert/nodatafound-alert";
 
 
 
@@ -13,6 +13,7 @@ function StudentListMarks(props) {
     const [studentlist, setStudentList] = useState()
     const [filterdetails, setFilterDetails] = useState();
     const [selectedStudent, setSelectedStudent] = useState();
+    const [ErrorDialog, setErrorDialog] = useState(true);
     const [subjects, setSubjects] = useState();
     const getSubjects = async () => {
         try {
@@ -24,6 +25,8 @@ function StudentListMarks(props) {
         }
     }
 
+    //  opening and closing addmarks details
+
     const openAddMarksDialog = (student) => {
         setSelectedStudent(student);
         setOpenAddMarks(true);
@@ -32,6 +35,13 @@ function StudentListMarks(props) {
     const closeModal = () => {
         setOpenAddMarks(false);
     };
+
+    // close error dialog
+
+    const errorDialog = () => {
+        props.history.goBack();
+        setErrorDialog(false);
+    }
 
 
     const getStudentData = async () => {
@@ -45,8 +55,7 @@ function StudentListMarks(props) {
             }
             setFilterDetails(queryDetails);
 
-            const data = await axios.get(`http://localhost:3000/api/v1/student`, { params: queryDetails });
-            console.log(data.data)
+            const data = await axios.get(`http://localhost:3000/api/v1/student/${queryDetails.branch}/${queryDetails.currentStudingyear}`);
             setStudentList(data.data);
         } catch (error) {
             console.error(error);
@@ -62,6 +71,12 @@ function StudentListMarks(props) {
 
     return (
         <div className="container">
+            {/* no data fond alert */}
+            {
+                studentlist?.length === 0 ? (
+                    <CommonAlert open={ErrorDialog} closeModal={errorDialog} errorMessage = {`No Student Found Please Select Another Department`}></CommonAlert>
+                ) : null
+            }
             <div className="row">
                 <div className="col-12 table-responsive">
                     <table className="table table-striped table-bordered">
@@ -76,25 +91,23 @@ function StudentListMarks(props) {
                         </thead>
                         <tbody>
                             {
-                                studentlist?.length !== 0 ? (
-                                    studentlist?.map((x, i) => {
-                                        return (
-                                            <tr key={Math.random()}>
-                                                <th scope="row">{i + 1}</th>
-                                                <td>{x?.rollNumber}</td>
-                                                <td>{x?.examNumber}</td>
-                                                <td>{`${x?.firstName} ${x?.lastName}`}</td>
-                                                <td className="text-center">
-                                                    <button type="button" className="btn btn-primary" onClick={() => {
-                                                        openAddMarksDialog(x)
-                                                    }}>
-                                                        <i className="bi bi-plus-circle-fill"></i> Add Marks
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })
-                                ) : null
+                                studentlist?.map((x, i) => {
+                                    return (
+                                        <tr key={Math.random()}>
+                                            <th scope="row">{i + 1}</th>
+                                            <td>{x?.rollNumber}</td>
+                                            <td>{x?.examNumber}</td>
+                                            <td>{`${x?.firstName} ${x?.lastName}`}</td>
+                                            <td className="text-center">
+                                                <button type="button" className="btn btn-primary" onClick={() => {
+                                                    openAddMarksDialog(x)
+                                                }}>
+                                                    <i className="bi bi-plus-circle-fill"></i> Add Marks
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
                             }
                         </tbody>
                     </table>
@@ -103,7 +116,7 @@ function StudentListMarks(props) {
                 <div>
                     {
 
-                        studentlist?.length !== 0 ? (<AddMarks open={openAddMarks} closeModal={closeModal} filterdetails={filterdetails} student={selectedStudent} subjects={subjects}></AddMarks>) : null
+                        studentlist?.length !== 0 ? (<AddMarks open={openAddMarks} closeModal={closeModal} filterdetails={filterdetails} student={selectedStudent} subjects={subjects} ></AddMarks>) : null
                     }
                 </div>
             </div>

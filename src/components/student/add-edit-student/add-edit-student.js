@@ -40,7 +40,7 @@ function AddEditStudent(props) {
         nameOf10School: '',
         nameOf12School: '',
         yearOfCollegeJoined: '',
-        currentStudingyear: '',
+        currentStudingYear: '',
         rollNumber: '',
         examNumber: '',
         branch: '',
@@ -258,11 +258,11 @@ function AddEditStudent(props) {
                         <div className="col-12 col-md-6">
                             <FormControl variant="outlined" className="w-100 my-3" required>
                                 <InputLabel id="demo-simple-select-outlined-label" className="bg-white">Current Studing Year</InputLabel>
-                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="currentStudingyear" value={formValues?.currentStudingyear} label="Current Studing Year" >
-                                    <MenuItem value={'First Year'}>First Year</MenuItem>
-                                    <MenuItem value={'Second Year'}>Second Year</MenuItem>
-                                    <MenuItem value={'Third Year'}>Third Year</MenuItem>
-                                    <MenuItem value={'Fourth Year'}>Fourth Year</MenuItem>
+                                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" onChange={handleFormvaluechange} name="currentStudingYear" value={formValues?.currentStudingyear} label="Current Studing Year" >
+                                    <MenuItem value='First Year'>First Year</MenuItem>
+                                    <MenuItem value='Second Year'>Second Year</MenuItem>
+                                    <MenuItem value='Third Year'>Third Year</MenuItem>
+                                    <MenuItem value='Fourth Year'>Fourth Year</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>

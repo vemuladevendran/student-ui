@@ -8,17 +8,6 @@ const ProfileUpload = (props) => {
     // open image selection
     const openImageSelection = (event) => {
 
-        // checking image selected or not and setting default image
-        if (imageUpload !== defaultImageUrl) {
-            if (props?.imageUrl) {
-                setImageUpload(defaultImageUrl);
-                return;
-            }
-        }
-
-
-
-
         // triggering input element
         imageInput.current.click()
     }
@@ -34,7 +23,6 @@ const ProfileUpload = (props) => {
     }
 
     useEffect(() => {
-        setImageUpload(props?.imageUrl);
     }, [])
     return (
         <div>
