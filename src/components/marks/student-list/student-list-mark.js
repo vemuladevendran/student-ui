@@ -54,7 +54,6 @@ function StudentListMarks(props) {
                 semester: props.match.params.semester
             }
             setFilterDetails(queryDetails);
-
             const data = await axios.get(`http://localhost:3000/api/v1/student/${queryDetails.branch}/${queryDetails.currentStudingYear}`);
             setStudentList(data.data);
         } catch (error) {
