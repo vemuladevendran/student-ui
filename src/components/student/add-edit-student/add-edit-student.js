@@ -95,14 +95,14 @@ function AddEditStudent(props) {
             const userId = payload.id;
             const studentId = props?.match?.params?.id;
             if (studentId) {
-                await axios.put(`http://localhost:3000/api/v1/student/${studentId}`, formData);
+                await axios.put(`http://localhost:5000/api/v1/student/${studentId}`, formData);
                 setLoaderStatus(false);
                 const result = await Swal.fire('Student Updated Successfuly');
                 if (result.isConfirmed) {
                     return props.history.push('/students')
                 }
             }
-            await axios.post(`http://localhost:3000/api/v1/student/${userId}`, formData);
+            await axios.post(`http://localhost:5000/api/v1/student/${userId}`, formData);
             // finally changing the loader status
             setLoaderStatus(false);
             const result = await Swal.fire('New Student Added Successfuly');
@@ -127,7 +127,7 @@ function AddEditStudent(props) {
             // changing loader status
             setLoaderStatus(true);
             const studentId = props?.match?.params?.id;
-            const student = await axios.get(`http://localhost:3000/api/v1/student/${studentId}`);
+            const student = await axios.get(`http://localhost:5000/api/v1/student/${studentId}`);
             setLoaderStatus(false);
             setFormValues(student.data);
             console.log(student.data)

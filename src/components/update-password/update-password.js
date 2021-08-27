@@ -78,7 +78,7 @@ function UpdatePassword(props) {
             const token = TokenServe.getToken();
             const payload = TokenServe.getTokenPayloadData(token);
             const userId = payload.id;
-            await axios.post(`http://localhost:3000/api/v1/updatepassword/${userId}`, data);
+            await axios.post(`http://localhost:5000/api/v1/updatepassword/${userId}`, data);
             // finally changing the loader status
             setLoaderStatus(false);
             const result = await Swal.fire('Password updated Successfuly');

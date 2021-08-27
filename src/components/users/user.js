@@ -32,7 +32,7 @@ function Users() {
     async function getUserData() {
         try {
             setLoaderStatus(true);
-            const data = await axios.get(`http://localhost:3000/api/v1/users`);
+            const data = await axios.get(`http://localhost:5000/api/v1/users`);
             setLoaderStatus(false);
             setUserData(data?.data);
         } catch (error) {
@@ -79,7 +79,7 @@ function Users() {
                     openSnackbar();
                     return;
                 }
-                const result = await axios.delete(`http://localhost:3000/api/v1/users/${userId}`);
+                const result = await axios.delete(`http://localhost:5000/api/v1/users/${userId}`);
                 getUserData();
             } catch (error) {
                 console.log(error, 'fail to delete');

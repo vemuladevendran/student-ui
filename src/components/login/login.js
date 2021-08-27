@@ -42,7 +42,7 @@ function Login(props) {
             setLoaderStatus(true);
             //  sending Ajax call
             const data = formValues;
-            const result = await axios.post('http://localhost:3000/api/v1/login', data);
+            const result = await axios.post('http://localhost:5000/api/v1/login', data);
             //  save login token
             const token = result.data.token;
             TokenServe.saveToken(token);

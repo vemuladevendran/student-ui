@@ -77,7 +77,7 @@ const getStudentRollNumber = async () => {
             const token = TokenServe.getToken();
             const payload = TokenServe.getTokenPayloadData(token);
             const userId = payload.id;
-            await axios.post('http://localhost:3000/api/v1/report', data, {params: {id : userId}});
+            await axios.post('http://localhost:5000/api/v1/report', data, {params: {id : userId}});
             const result = await Swal.fire('New Report Created');
             setLoaderStatus(false);
             if (result.isConfirmed) {

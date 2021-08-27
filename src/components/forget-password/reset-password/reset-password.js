@@ -54,7 +54,7 @@ function ResetPassword(props) {
             //  sending Ajax call
             const data = password;
             const queryDetails = props.match.params;
-            await axios.post(`http://localhost:3000/api/v1/verifyforgetpassword/${queryDetails.id}/${queryDetails.otp}`, data);
+            await axios.post(`http://localhost:5000/api/v1/verifyforgetpassword/${queryDetails.id}/${queryDetails.otp}`, data);
             // finally changing the loader status
             setLoaderStatus(false);
             const result = await Swal.fire('password changed successfuly');

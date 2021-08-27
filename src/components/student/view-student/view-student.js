@@ -36,7 +36,7 @@ function ViewStudent(props) {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/api/v1/student/${id}`);
+        await axios.delete(`http://localhost:5000/api/v1/student/${id}`);
         props.history.goBack();
       } catch (error) {
         console.log(error, "fail to delete");
@@ -49,7 +49,7 @@ function ViewStudent(props) {
       setLoaderStatus(true);
       const studentId = props?.match?.params?.id;
       const student = await axios.get(
-        `http://localhost:3000/api/v1/student/${studentId}`
+        `http://localhost:5000/api/v1/student/${studentId}`
       );
       console.log(student.data);
       setStudent(student.data);

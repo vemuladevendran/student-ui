@@ -34,7 +34,7 @@ function StudentListMarks(props) {
   const getSubjects = async () => {
     try {
       const data = await axios.get(
-        `http://localhost:3000/api/v1/subjects/${props.match.params.branch}/${props.match.params.semester}`
+        `http://localhost:5000/api/v1/subjects/${props.match.params.branch}/${props.match.params.semester}`
       );
       console.log(data.data);
       setSubjects(data?.data);
@@ -71,7 +71,7 @@ function StudentListMarks(props) {
       };
       setFilterDetails(queryDetails);
       const data = await axios.get(
-        `http://localhost:3000/api/v1/student/${queryDetails.branch}/${queryDetails.currentStudingYear}`
+        `http://localhost:5000/api/v1/student/${queryDetails.branch}/${queryDetails.currentStudingYear}`
       );
       setStudentList(data.data);
     } catch (error) {

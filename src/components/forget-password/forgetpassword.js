@@ -45,7 +45,7 @@ function ForgetPassword(props) {
             setLoaderStatus(true);
             //  sending Ajax call
             const data = email;
-            await axios.post(`http://localhost:3000/api/v1/forgetpassword/`, data);
+            await axios.post(`http://localhost:5000/api/v1/forgetpassword/`, data);
             // finally changing the loader status
             setLoaderStatus(false);
             const result = await Swal.fire('Reset Link is send to your register Email Id');

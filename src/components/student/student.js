@@ -53,7 +53,7 @@ export default function Students() {
 
   const getCirculars = async () => {
     try {
-      const data = await axios.get("http://localhost:3000/api/v1/circular");
+      const data = await axios.get("http://localhost:5000/api/v1/circular");
       setCirculars(data.data);
     } catch (error) {
       console.log(error);
@@ -64,7 +64,7 @@ export default function Students() {
 
   const getReports = async () => {
     try {
-      const data = await axios.get("http://localhost:3000/api/v1/report");
+      const data = await axios.get("http://localhost:5000/api/v1/report");
       setReports(data.data);
     } catch (error) {
       console.log(error);
@@ -123,7 +123,7 @@ export default function Students() {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/api/v1/student/${id}`);
+        await axios.delete(`http://localhost:5000/api/v1/student/${id}`);
         getStudentsDetails();
       } catch (error) {
         console.log(error, "fail to delete");

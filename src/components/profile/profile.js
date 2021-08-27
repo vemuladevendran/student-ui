@@ -28,7 +28,7 @@ function Profile(params) {
             const payload = TokenServe.getTokenPayloadData(token);
             const userId = payload.id;
             setLoaderStatus(true);
-            const data = await axios.get(`http://localhost:3000/api/v1/users/${userId}`);
+            const data = await axios.get(`http://localhost:5000/api/v1/users/${userId}`);
             setLoaderStatus(false);
             setProfileData(data.data);
             console.log(profileData)
