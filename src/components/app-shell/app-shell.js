@@ -261,7 +261,7 @@ function ResponsiveDrawer(props) {
                     <Route exact path='/marks-department-selection'>
                         <DepartmentSelectionForm></DepartmentSelectionForm>
                     </Route>
-                    <Route exact path='/studentlist-marks/:branch/:currentStudingYear/:semester/:examname'>
+                    <Route exact path='/studentlist-marks/:branch/:currentStudingYear/:semester/:examName'>
                         <StudentListMarks></StudentListMarks>
                     </Route>
 

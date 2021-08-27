@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import * as marksServe from "../../../service/http/marks";
 function AddMarks(props) {
 
+  const [filterdetails, setFilterDetails] = useState();
   const [selectedStudent, setSelectedStudent] = useState();
   const [subjects, setSubjects] = useState();
   const [formValues, setFormValues] = useState({});
@@ -31,6 +32,7 @@ function AddMarks(props) {
 
   //   getting selected student details
   useEffect(() => {
+    setFilterDetails(props?.filterdetails);
     setSelectedStudent(props?.student);
     setSubjects(props?.subjects);
   });
@@ -52,6 +54,7 @@ function AddMarks(props) {
       section: selectedStudent?.section,
       branch: selectedStudent?.branch,
       currentStudingYear: selectedStudent?.currentStudingYear,
+      examName: filterdetails?.examName,
     });
   }, [selectedStudent]);
 
