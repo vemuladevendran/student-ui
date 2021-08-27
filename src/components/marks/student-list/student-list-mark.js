@@ -67,6 +67,7 @@ function StudentListMarks(props) {
         branch: props.match.params.branch,
         currentStudingYear: props.match.params.currentStudingYear,
         semester: props.match.params.semester,
+        examName: props.match.params.examName,
       };
       setFilterDetails(queryDetails);
       const data = await axios.get(

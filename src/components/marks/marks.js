@@ -20,7 +20,6 @@ function Marks() {
   const [open, setOpen] = useState(false);
   const [branches, setBranches] = useState();
   const [marksList, setMarksList] = useState();
-  const [marks, setMarks] = useState();
 
   // open snakbar
   const openSnackbar = () => {
@@ -31,23 +30,10 @@ function Marks() {
     setOpen(false);
   };
 
-
-  const setSubjectMarks = () => {
-      const data = [];
-    marksList?.map((x) => {
-       data.push(x.subjectsMarks);
-    });
-    setMarks(data);
-  };
-
-  useEffect(() => {
-    console.log(marks);
-  }, [marks]);
-
   async function getMarksData() {
     try {
       setLoaderStatus(true);
-     const data  = await marksServe.getMarks();
+      const data = await marksServe.getMarks();
       setLoaderStatus(false);
       setMarksList(data?.data);
     } catch (error) {
@@ -67,12 +53,6 @@ function Marks() {
     setBranches(data);
   }, []);
 
-  //   applying marks
-
-  useEffect(() => {
-    setSubjectMarks();
-  }, [marksList]);
-
   // delete marks
   const deleteMarks = async (id) => {
     const result = await Swal.fire({
@@ -87,6 +67,8 @@ function Marks() {
 
     if (result.isConfirmed) {
       try {
+        await marksServe.deleteMarks(id);
+        getMarksData();
       } catch (error) {}
     }
   };
@@ -209,11 +191,11 @@ function Marks() {
                       overflow: "auto",
                     }}
                   >
-                    {marks?.map((y, i) => {
+                    {Object.entries(x.subjectsMarks)?.map((y, i) => {
                       return (
                         <div key={i}>
-                          <span>{Object.keys(y)}</span>
-                          <span>{Object.values(y)}</span>
+                          <span>{`${y[0]}  : `}</span>
+                          <span className="fw-bold">{y[1]}</span>
                         </div>
                       );
                     })}
