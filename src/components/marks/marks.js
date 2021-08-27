@@ -20,6 +20,11 @@ function Marks() {
   const [open, setOpen] = useState(false);
   const [branches, setBranches] = useState();
   const [marksList, setMarksList] = useState();
+  const [filter, setFilter] = useState({
+    branch: "",
+    currentStudingYear: "",
+    section: "",
+  });
 
   // open snakbar
   const openSnackbar = () => {
@@ -33,7 +38,17 @@ function Marks() {
   async function getMarksData() {
     try {
       setLoaderStatus(true);
-      const data = await marksServe.getMarks();
+      if (
+        filter.branch === "" &&
+        filter.currentStudingYear === "" &&
+        filter.section === ""
+      ) {
+        const data = await marksServe.getMarks();
+        setLoaderStatus(false);
+        setMarksList(data?.data);
+        return;
+      }
+      const data = await marksServe.getMarks(filter);
       setLoaderStatus(false);
       setMarksList(data?.data);
     } catch (error) {
@@ -52,6 +67,22 @@ function Marks() {
     const data = departments();
     setBranches(data);
   }, []);
+
+  //   handleing filters
+  const onFilterChange = async (event) => {
+    try {
+      setFilter({
+        ...filter,
+        [event.target.name]: event.target.value,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getMarksData();
+  }, [filter]);
 
   // delete marks
   const deleteMarks = async (id) => {
@@ -93,13 +124,15 @@ function Marks() {
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
               label="BRANCH"
+              name="branch"
+              onChange={onFilterChange}
             >
               <MenuItem value="">
                 <em>All</em>
               </MenuItem>
-              {branches?.map((x) => {
+              {branches?.map((x, i) => {
                 return (
-                  <MenuItem key={Math.random()} value={x}>
+                  <MenuItem key={i} value={x}>
                     {x}
                   </MenuItem>
                 );
@@ -120,7 +153,8 @@ function Marks() {
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
               label="Year"
-              name="year"
+              name="currentStudingYear"
+              onChange={onFilterChange}
             >
               <MenuItem value="">
                 <em>All</em>
@@ -147,6 +181,7 @@ function Marks() {
               id="demo-simple-select-outlined"
               label="section"
               name="section"
+              onChange={onFilterChange}
             >
               <MenuItem value="">
                 <em>All</em>
