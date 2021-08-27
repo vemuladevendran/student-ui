@@ -8,7 +8,7 @@ export const menuItems = [
     ['group_add', 'Add User', '/users/add-user', 'admin'],
     ['list', 'Marks', '/marks', 'all'],
     ['assignment', 'Create Circular', '/add-circular', 'all'],
-    ['bug_report', 'Create Report', '/create-report', 'all'],
+    ['bug_report', 'Create Report', '/create-report/new', 'all'],
     ['phonelink_lock', 'Update Password', '/update-password', 'all'],
     ['account_box', 'Profile', '/profile', 'all'],
 ].map(([icon, text, path, acl]) => ({ icon, text, path, acl }));

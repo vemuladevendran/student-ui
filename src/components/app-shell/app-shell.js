@@ -246,7 +246,7 @@ function ResponsiveDrawer(props) {
                     <Route exact path='/add-circular'>
                         <AddCircular></AddCircular>
                     </Route>
-                    <Route exact path='/create-report'>
+                    <Route exact path='/create-report/:id'>
                         <CreateReport></CreateReport>
                     </Route>
                     <Route exact path='/update-password'>

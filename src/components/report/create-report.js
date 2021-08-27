@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import TextField from '@material-ui/core/TextField';
 import Loader from '../loader/loader';
@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
 import TokenServe from '../../service/token/token'
-
+import * as studentServe from '../../service/http/student';
 
 function CreateReport(props) {
     const [errorMessage, setErrorMessage] = useState('');
@@ -20,6 +20,20 @@ function CreateReport(props) {
         studentRollNumber: '',
         reportContent: '',
     });
+
+
+const getStudentRollNumber = async () => {
+    try {
+        const studentId = props?.match?.params?.id;
+        const student = await studentServe.getStudentById(studentId);
+       const rollNumber = student?.data?.rollNumber
+        setFormValues({
+            studentRollNumber: rollNumber,
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
 
     // handle formvalue change
 
@@ -79,6 +93,11 @@ function CreateReport(props) {
     }
 
 
+    useEffect(() => {
+        getStudentRollNumber();
+    },[])
+
+
     return (
         <div className="container h-100">
             {/* loader */}
@@ -89,7 +108,7 @@ function CreateReport(props) {
                 <section className="col-12 col-md-6 shadow p-4">
                     <TextField id="outlined-basic" label="Report Title" onChange={handleFormvaluechange} name="reportTitle" variant="outlined" className="w-100 my-3" required />
                     <TextField id="outlined-basic" label="Report Date" onChange={handleFormvaluechange} name="reportDate" type="date" variant="outlined" className="w-100 my-3" required />
-                    <TextField id="outlined-basic" label="Student RollNumber" onChange={handleFormvaluechange} name="studentRollNumber" variant="outlined" className="w-100 my-3" required />
+                    <TextField id="outlined-basic" label="Student RollNumber" value={formValues?.studentRollNumber} onChange={handleFormvaluechange} name="studentRollNumber" variant="outlined" className="w-100 my-3" required />
                     <textarea placeholder="Report content" onChange={handleFormvaluechange} name="reportContent" className="w-100 my-3" style={{ height: '100px' }} required />
                     {/* button section */}
                     <div className="d-md-flex justify-content-center">
