@@ -80,9 +80,9 @@ function ViewStudent(props) {
     if (navigator.share) {
       navigator
         .share({
-          title: `${student?.firstName} personal data`,
+          title: `Student Data`,
           url: window.location.href,
-          text: "Student Data",
+          text: `${student?.firstName} personal data`,
         })
         .catch(() => console.warn("Failed to share"));
     }
