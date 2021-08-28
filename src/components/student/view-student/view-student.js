@@ -76,16 +76,16 @@ function ViewStudent(props) {
     getTokenData();
   }, []);
 
- 
-
   const share = () => {
-    navigator
-      .share({
-        title: `${student?.firstName} personal data`,
-        url: window.location.href,
-        text: 'Student Data',
-      })
-      .catch(() => console.warn("Failed to share"));
+    if (navigator.share) {
+      navigator
+        .share({
+          title: `${student?.firstName} personal data`,
+          url: window.location.href,
+          text: "Student Data",
+        })
+        .catch(() => console.warn("Failed to share"));
+    }
   };
 
   return (
@@ -110,7 +110,11 @@ function ViewStudent(props) {
                 role="group"
                 aria-label="Basic mixed styles example"
               >
-                <button type="button" className="btn btn-success" onClick={share}>
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  onClick={share}
+                >
                   Share
                 </button>
                 <NavLink
