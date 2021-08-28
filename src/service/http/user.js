@@ -1,14 +1,18 @@
 
 import axios from "axios"
-import { SettingsService } from '../settings/settings';
 
+const urlPort = 'https://studentmanagmentdb.herokuapp.com/api/v1'
 
-const getUsers = () => {
-    return (axios.get(`${SettingsService.Settings}/users`));
+export const getUsers = () => {
+    return (axios.get(`${urlPort}/users`));
+}
+
+export const createUser = (data) => {
+     return(axios.post(`${urlPort}/users`, data))
 }
 
 
-
-module.exports = {
-    getUsers,
+export const deleteUser = (id) =>{
+return(axios.delete(`${urlPort}/users/${id}`))
 }
+

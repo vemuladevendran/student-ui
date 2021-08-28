@@ -7,8 +7,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import { NavLink, withRouter } from "react-router-dom";
 import TokenServe from "../../../service/token/token";
-import { Dialog } from "@material-ui/core";
-
+import * as studentServe from '../../../service/http/student'
 function ViewStudent(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const [loader, setLoaderStatus] = useState(false);
@@ -36,7 +35,7 @@ function ViewStudent(props) {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:5000/api/v1/student/${id}`);
+        await studentServe.deleteStudent(id)
         props.history.goBack();
       } catch (error) {
         console.log(error, "fail to delete");
@@ -48,9 +47,7 @@ function ViewStudent(props) {
     try {
       setLoaderStatus(true);
       const studentId = props?.match?.params?.id;
-      const student = await axios.get(
-        `http://localhost:5000/api/v1/student/${studentId}`
-      );
+      const student = await studentServe.getStudentById(studentId);
       console.log(student.data);
       setStudent(student.data);
       setLoaderStatus(false);

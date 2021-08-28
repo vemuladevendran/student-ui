@@ -4,12 +4,11 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Loader from '../../loader/loader';
-import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
-
+import * as userServe from '../../../service/http/user'
 
 function AddUser(props) {
 
@@ -67,8 +66,7 @@ function AddUser(props) {
             //  sending Ajax call
 
             const data = formValues;
-            // await axios.post('https://studentmanagmentdb.herokuapp.com/api/v1/users', data);
-            await axios.post('http://localhost:5000/api/v1/users', data);
+            await userServe.createUser(data)
             const result = await Swal.fire('New User Added Successfuly');
             // finally changing the loader status
             setLoaderStatus(false);
@@ -77,7 +75,7 @@ function AddUser(props) {
             }
         } catch (error) {
             //  showing error message
-            const errorMessage = error;
+            const errorMessage = error.response.data.message;
             setErrorMessage(errorMessage);
             openSnackbar();
             // finally changing the loader status

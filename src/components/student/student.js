@@ -11,6 +11,8 @@ import departments from "../../service/departement/branches";
 import axios from "axios";
 import ViewCircularReports from "./view-circular-reports/view-circular-report";
 import * as studentServe from "../../service/http/student";
+import * as reportServe from '../../service/http/report';
+import * as circularServe from '../../service/http/circular'
 export default function Students() {
   const [branches, setBranches] = useState();
   const [isAdmin, setIsAdmin] = useState();
@@ -53,7 +55,7 @@ export default function Students() {
 
   const getCirculars = async () => {
     try {
-      const data = await axios.get("http://localhost:5000/api/v1/circular");
+      const data = await circularServe.getCirculars();
       setCirculars(data.data);
     } catch (error) {
       console.log(error);
@@ -64,7 +66,7 @@ export default function Students() {
 
   const getReports = async () => {
     try {
-      const data = await axios.get("http://localhost:5000/api/v1/report");
+      const data = await reportServe.getReports();
       setReports(data.data);
     } catch (error) {
       console.log(error);
@@ -123,7 +125,7 @@ export default function Students() {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:5000/api/v1/student/${id}`);
+        await studentServe.deleteStudent(id)
         getStudentsDetails();
       } catch (error) {
         console.log(error, "fail to delete");
