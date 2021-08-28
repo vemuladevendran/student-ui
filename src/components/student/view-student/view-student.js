@@ -82,8 +82,8 @@ function ViewStudent(props) {
         .share({
           url: window.location.href,
           file: student?.photo || "/assets/default-profile.png",
-          // title: `Student Data`,
-          // text: `${student?.firstName} personal data`,
+          title: `Student Data`,
+          text: `${student?.firstName} personal data`,
         })
         .catch(() => console.warn("Failed to share"));
     }

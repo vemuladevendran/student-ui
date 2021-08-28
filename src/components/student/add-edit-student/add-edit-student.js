@@ -89,20 +89,40 @@ function AddEditStudent(props) {
         formData.append(key, formValues[key])
       );
       formData.append("photo", imageFile);
-
+      console.log(imageFile);
       const token = TokenServe.getToken();
       const payload = TokenServe.getTokenPayloadData(token);
       const userId = payload.id;
       const studentId = props?.match?.params?.id;
       if (studentId) {
-        await studentServe.updateStudent(studentId, formData);
+        if (imageFile !== undefined) {
+          await studentServe.updateStudent(studentId, formData);
+          setLoaderStatus(false);
+          const result = await Swal.fire("Student Updated Successfuly");
+          if (result.isConfirmed) {
+            return props.history.push("/students");
+          }
+        }
+        await studentServe.updateStudent(studentId, formValues);
         setLoaderStatus(false);
         const result = await Swal.fire("Student Updated Successfuly");
         if (result.isConfirmed) {
           return props.history.push("/students");
         }
       }
-      await studentServe.createStudents(userId, formData);
+
+      if (imageFile !== undefined) {
+        await studentServe.createStudents(userId, formData);
+        // finally changing the loader status
+        setLoaderStatus(false);
+        const result = await Swal.fire("New Student Added Successfuly");
+        if (result.isConfirmed) {
+          props.history.push("/students");
+        }
+        return;
+      }
+
+      await studentServe.createStudents(userId, formValues);
       // finally changing the loader status
       setLoaderStatus(false);
       const result = await Swal.fire("New Student Added Successfuly");
