@@ -135,7 +135,7 @@ function ViewStudent(props) {
             </div>
           </div>
           {/* contact details */}
-          <div className="shadow-lg p-4 bg-white mt-4">
+          <div className="shadow-lg p-4 bg-white overflow-auto mt-4">
             <p className="h5 fw-bold mt-4">
               Email : <span className="text-info">{student?.email}</span>
             </p>

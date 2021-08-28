@@ -10,11 +10,13 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import departments from "../../service/departement/branches";
 import * as marksServe from "../../service/http/marks";
+import CommonAlert from "../../common-models/common-alert/nodatafound-alert";
 
-function Marks() {
+function Marks(props) {
+  const [ErrorDialog, setErrorDialog] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [loader, setLoaderStatus] = useState(false);
   const [open, setOpen] = useState(false);
@@ -33,6 +35,13 @@ function Marks() {
   // close snakbar
   const closeSnackbar = () => {
     setOpen(false);
+  };
+
+   // close error dialog
+
+   const errorDialog = () => {
+    props.history.push('marks-department-selection');
+    setErrorDialog(false);
   };
 
   async function getMarksData() {
@@ -111,6 +120,13 @@ function Marks() {
       {/* filters */}
 
       <div className="row">
+      {marksList?.length === 0 ? (
+        <CommonAlert
+          open={ErrorDialog}
+          closeModal={errorDialog}
+          errorMessage={`No Marks Found Please Add Marks`}
+        ></CommonAlert>
+      ) : null}
         <div className="col-12 col-md-3 col-lg-3 my-2">
           {/* branch filter */}
           <FormControl variant="outlined" style={{ width: "100%" }}>
@@ -279,4 +295,4 @@ function Marks() {
   );
 }
 
-export default Marks;
+export default withRouter(Marks);

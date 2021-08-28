@@ -5,15 +5,17 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import TokenServe from "../../service/token/token";
 import departments from "../../service/departement/branches";
-import axios from "axios";
 import ViewCircularReports from "./view-circular-reports/view-circular-report";
 import * as studentServe from "../../service/http/student";
-import * as reportServe from '../../service/http/report';
-import * as circularServe from '../../service/http/circular'
-export default function Students() {
+import * as reportServe from "../../service/http/report";
+import * as circularServe from "../../service/http/circular";
+import CommonAlert from "../../common-models/common-alert/nodatafound-alert";
+
+function Students(props) {
+  const [ErrorDialog, setErrorDialog] = useState(true);
   const [branches, setBranches] = useState();
   const [isAdmin, setIsAdmin] = useState();
   const [students, setStudents] = useState();
@@ -26,6 +28,13 @@ export default function Students() {
   const [ViewCircularReport, setViewCircularReport] = useState(false);
   const [dialogData, setDialogData] = useState();
 
+  // close error dialog
+
+  const errorDialog = () => {
+    props.history.push('students/add-student');
+    setErrorDialog(false);
+  };
+
   // getting token data
   const getTokenData = () => {
     const token = TokenServe.getToken();
@@ -37,7 +46,6 @@ export default function Students() {
 
   const getStudentsDetails = async () => {
     try {
-        
       if (filter.branch === "" && filter.currentStudingYear === "") {
         const students = await studentServe.getStudents();
         setStudents(students.data);
@@ -125,7 +133,7 @@ export default function Students() {
 
     if (result.isConfirmed) {
       try {
-        await studentServe.deleteStudent(id)
+        await studentServe.deleteStudent(id);
         getStudentsDetails();
       } catch (error) {
         console.log(error, "fail to delete");
@@ -155,6 +163,14 @@ export default function Students() {
         <div className="row">
           {/* student list */}
           <div className="col-12 col-lg-9">
+             {/* no data fond alert */}
+      {students?.length === 0 ? (
+        <CommonAlert
+          open={ErrorDialog}
+          closeModal={errorDialog}
+          errorMessage={`No Student Found Please Add Students`}
+        ></CommonAlert>
+      ) : null}
             {/* filters */}
             <div className="row">
               <div className="col-12 col-md-4 col-lg-3 m-2">
@@ -275,9 +291,17 @@ export default function Students() {
           </div>
           {/* graph */}
           <div className="col-12 col-lg-3 d-none d-lg-block vh-100 border-start">
+          
             {/* circular list */}
             <div className="overflow-auto h-50">
               <h4 className="fw-bold">CIRCULARS</h4>
+              {
+              circular?.length === 0 ? (
+                 <h3 className="fw-bold text-warning h-50 d-flex align-items-center">
+                   No Circulars Found !
+                 </h3>
+              ) : null
+            }
               {circular?.map((x) => {
                 return (
                   <div
@@ -299,6 +323,13 @@ export default function Students() {
             {/* roport list */}
             <div className="overflow-auto h-50">
               <h4 className="fw-bold">REPORTS</h4>
+              {
+              reports?.length === 0 ? (
+                 <h3 className="fw-bold text-warning h-50 d-flex align-items-center">
+                   No Reports Found !
+                 </h3>
+              ) : null
+            }
               {reports?.map((x) => {
                 return (
                   <div
@@ -330,3 +361,6 @@ export default function Students() {
     </>
   );
 }
+
+
+export default withRouter(Students)

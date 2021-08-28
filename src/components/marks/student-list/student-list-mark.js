@@ -6,6 +6,8 @@ import CommonAlert from "../../../common-models/common-alert/nodatafound-alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import * as studentServe from "../../../service/http/student";
+import * as subjectsServe from "../../../service/http/subjects";
 
 function StudentListMarks(props) {
   const [successMessage, setSuccessMessage] = useState("");
@@ -33,9 +35,11 @@ function StudentListMarks(props) {
 
   const getSubjects = async () => {
     try {
-      const data = await axios.get(
-        `http://localhost:5000/api/v1/subjects/${props.match.params.branch}/${props.match.params.semester}`
+      const data = await subjectsServe.getSubjects(
+        props.match.params.branch,
+        props.match.params.semester
       );
+
       console.log(data.data);
       setSubjects(data?.data);
     } catch (error) {
@@ -70,9 +74,7 @@ function StudentListMarks(props) {
         examName: props.match.params.examName,
       };
       setFilterDetails(queryDetails);
-      const data = await axios.get(
-        `http://localhost:5000/api/v1/student/${queryDetails.branch}/${queryDetails.currentStudingYear}`
-      );
+      const data = await studentServe.getStudents(queryDetails);
       setStudentList(data.data);
     } catch (error) {
       console.error(error);

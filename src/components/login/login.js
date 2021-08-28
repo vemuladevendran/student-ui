@@ -7,7 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { NavLink, withRouter } from 'react-router-dom';
-
+import * as loginServe from '../../service/http/login'
 function Login(props) {
 
     const [formValues, setFormValues] = useState({ email: '', password: '' });
@@ -42,7 +42,7 @@ function Login(props) {
             setLoaderStatus(true);
             //  sending Ajax call
             const data = formValues;
-            const result = await axios.post('http://localhost:5000/api/v1/login', data);
+            const result = await loginServe.login(data);
             //  save login token
             const token = result.data.token;
             TokenServe.saveToken(token);
