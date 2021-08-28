@@ -145,6 +145,11 @@ function ViewStudent(props) {
                 className="w-100"
                 loading="lazy"
                 decoding="async"
+                style = {
+                  {
+                    maxHeight: '21rem'
+                  }
+                }
               />
             </div>
             {/* lastupdate details */}

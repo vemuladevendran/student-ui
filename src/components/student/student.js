@@ -237,7 +237,7 @@ function Students(props) {
                   <div key={i} className="card m-1" style={{ width: "17rem" }}>
                     <div style={{ maxHeight: "21rem", minHeight: "18.5rem" }}>
                       <img
-                        src={x?.photo || "/assets/photo.jpeg"}
+                        src={x?.photo || "/assets/default-profile.png"}
                         className="card-img-top mw-100 mh-100"
                         loading="lazy"
                         decoding="async"
