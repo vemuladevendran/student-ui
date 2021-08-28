@@ -1,7 +1,6 @@
 import { React, useState, Fragment } from 'react';
 import ss from './login.module.css';
 import Loader from '../loader/loader';
-import axios from 'axios';
 import TokenServe from '../../service/token/token'
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';

@@ -9,8 +9,12 @@ export const getUsers = () => {
 
 export const createUser = (data) => {
      return(axios.post(`${urlPort}/users`, data))
+
 }
 
+export const getUserById = (id) => {
+    return(axios.get(`${urlPort}/users/${id}`))
+}
 
 export const deleteUser = (id) =>{
 return(axios.delete(`${urlPort}/users/${id}`))

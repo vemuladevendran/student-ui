@@ -6,13 +6,13 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import { FormControl } from '@material-ui/core';
 import Loader from '../loader/loader';
-import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
 import departments from '../../service/departement/branches';
-import TokenServe from '../../service/token/token'
+import TokenServe from '../../service/token/token';
+import * as circularServe from '../../service/http/circular';
 
 function AddCircular(props) {
     const [errorMessage, setErrorMessage] = useState('');
@@ -68,7 +68,11 @@ function AddCircular(props) {
             const token = TokenServe.getToken();
             const payload = TokenServe.getTokenPayloadData(token);
             const userId = payload.id;
-            await axios.post('http://localhost:5000/api/v1/circular', data, { params: { id: userId } });
+            const params = {
+                id: userId
+            }
+            await circularServe.createCirculars(data, params)
+            // await axios.post('http://localhost:5000/api/v1/circular', data, { params: { id: userId } });
             const result = await Swal.fire('New Circular Added Successfuly');
             setLoaderStatus(false);
             if (result.isConfirmed) {

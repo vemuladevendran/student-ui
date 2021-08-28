@@ -7,7 +7,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import { NavLink, withRouter } from "react-router-dom";
 import TokenServe from "../../../service/token/token";
-import * as studentServe from '../../../service/http/student'
+import * as studentServe from "../../../service/http/student";
 function ViewStudent(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const [loader, setLoaderStatus] = useState(false);
@@ -35,7 +35,7 @@ function ViewStudent(props) {
 
     if (result.isConfirmed) {
       try {
-        await studentServe.deleteStudent(id)
+        await studentServe.deleteStudent(id);
         props.history.goBack();
       } catch (error) {
         console.log(error, "fail to delete");
@@ -76,6 +76,18 @@ function ViewStudent(props) {
     getTokenData();
   }, []);
 
+ 
+
+  const share = () => {
+    navigator
+      .share({
+        title: `${student?.firstName} personal data`,
+        url: window.location.href,
+        text: 'Student Data',
+      })
+      .catch(() => console.warn("Failed to share"));
+  };
+
   return (
     <div className="container-fluid">
       {/* loader */}
@@ -98,10 +110,14 @@ function ViewStudent(props) {
                 role="group"
                 aria-label="Basic mixed styles example"
               >
-                <button type="button" className="btn btn-success">
+                <button type="button" className="btn btn-success" onClick={share}>
                   Share
                 </button>
-                <NavLink type="button" className="btn btn-warning"  to={`../../create-report/${student?.id}`}>
+                <NavLink
+                  type="button"
+                  className="btn btn-warning"
+                  to={`../../create-report/${student?.id}`}
+                >
                   Report
                 </NavLink>
                 {isAdmin === "true" ? (
@@ -122,6 +138,8 @@ function ViewStudent(props) {
                 src={`${student?.photo || "/assets/default-profile.png"}`}
                 alt="profile"
                 className="w-100"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             {/* lastupdate details */}

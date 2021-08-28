@@ -31,7 +31,7 @@ function Students(props) {
   // close error dialog
 
   const errorDialog = () => {
-    props.history.push('students/add-student');
+    props.history.push("students/add-student");
     setErrorDialog(false);
   };
 
@@ -163,14 +163,14 @@ function Students(props) {
         <div className="row">
           {/* student list */}
           <div className="col-12 col-lg-9">
-             {/* no data fond alert */}
-      {students?.length === 0 ? (
-        <CommonAlert
-          open={ErrorDialog}
-          closeModal={errorDialog}
-          errorMessage={`No Student Found Please Add Students`}
-        ></CommonAlert>
-      ) : null}
+            {/* no data fond alert */}
+            {students?.length === 0 ? (
+              <CommonAlert
+                open={ErrorDialog}
+                closeModal={errorDialog}
+                errorMessage={`No Student Found Please Add Students`}
+              ></CommonAlert>
+            ) : null}
             {/* filters */}
             <div className="row">
               <div className="col-12 col-md-4 col-lg-3 m-2">
@@ -291,17 +291,14 @@ function Students(props) {
           </div>
           {/* graph */}
           <div className="col-12 col-lg-3 d-none d-lg-block vh-100 border-start">
-          
             {/* circular list */}
             <div className="overflow-auto h-50">
               <h4 className="fw-bold">CIRCULARS</h4>
-              {
-              circular?.length === 0 ? (
-                 <h3 className="fw-bold text-warning h-50 d-flex align-items-center">
-                   No Circulars Found !
-                 </h3>
-              ) : null
-            }
+              {circular?.length === 0 ? (
+                <h3 className="fw-bold text-warning h-50 d-flex align-items-center">
+                  No Circulars Found !
+                </h3>
+              ) : null}
               {circular?.map((x) => {
                 return (
                   <div
@@ -323,13 +320,11 @@ function Students(props) {
             {/* roport list */}
             <div className="overflow-auto h-50">
               <h4 className="fw-bold">REPORTS</h4>
-              {
-              reports?.length === 0 ? (
-                 <h3 className="fw-bold text-warning h-50 d-flex align-items-center">
-                   No Reports Found !
-                 </h3>
-              ) : null
-            }
+              {reports?.length === 0 ? (
+                <h3 className="fw-bold text-warning h-50 d-flex align-items-center">
+                  No Reports Found !
+                </h3>
+              ) : null}
               {reports?.map((x) => {
                 return (
                   <div
@@ -362,5 +357,4 @@ function Students(props) {
   );
 }
 
-
-export default withRouter(Students)
+export default withRouter(Students);

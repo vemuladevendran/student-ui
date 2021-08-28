@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
-import axios from "axios";
 import IconButton from "@material-ui/core/IconButton";
 import Loader from "../loader/loader";
 import Snackbar from "@material-ui/core/Snackbar";

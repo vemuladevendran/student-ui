@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { withRouter } from "react-router-dom";
 import Loader from '../../loader/loader';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,6 +11,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import * as passwordServe from '../../../service/http/password';
 
 function ResetPassword(props) {
 
@@ -54,7 +54,7 @@ function ResetPassword(props) {
             //  sending Ajax call
             const data = password;
             const queryDetails = props.match.params;
-            await axios.post(`http://localhost:5000/api/v1/verifyforgetpassword/${queryDetails.id}/${queryDetails.otp}`, data);
+            await passwordServe.verifyForgetPassword(queryDetails.id, queryDetails.otp, data)
             // finally changing the loader status
             setLoaderStatus(false);
             const result = await Swal.fire('password changed successfuly');

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { withRouter } from "react-router-dom";
 import Loader from '../loader/loader';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import * as passwordServe from '../../service/http/password';
 
 function ForgetPassword(props) {
 
@@ -45,7 +45,7 @@ function ForgetPassword(props) {
             setLoaderStatus(true);
             //  sending Ajax call
             const data = email;
-            await axios.post(`http://localhost:5000/api/v1/forgetpassword/`, data);
+            await passwordServe.forgetPassword(data)
             // finally changing the loader status
             setLoaderStatus(false);
             const result = await Swal.fire('Reset Link is send to your register Email Id');

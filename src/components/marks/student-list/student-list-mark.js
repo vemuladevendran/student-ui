@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import AddMarks from "../add-marks/add-marks";

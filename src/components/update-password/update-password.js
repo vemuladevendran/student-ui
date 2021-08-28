@@ -13,6 +13,7 @@ import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import TokenServe from '../../service/token/token';
+import * as passwordServe from '../../service/http/password';
 
 function UpdatePassword(props) {
 
@@ -78,7 +79,7 @@ function UpdatePassword(props) {
             const token = TokenServe.getToken();
             const payload = TokenServe.getTokenPayloadData(token);
             const userId = payload.id;
-            await axios.post(`http://localhost:5000/api/v1/updatepassword/${userId}`, data);
+            await passwordServe.updatePassword(userId, data);
             // finally changing the loader status
             setLoaderStatus(false);
             const result = await Swal.fire('Password updated Successfuly');
