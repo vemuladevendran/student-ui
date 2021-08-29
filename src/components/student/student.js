@@ -49,6 +49,7 @@ function Students(props) {
       if (filter.branch === "" && filter.currentStudingYear === "") {
         const students = await studentServe.getStudents();
         setStudents(students.data);
+        console.log(students.data);
         return;
       }
       const students = await studentServe.getStudents(filter);
