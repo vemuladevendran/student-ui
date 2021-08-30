@@ -59,6 +59,7 @@ function ViewStudent(props) {
       openSnackbar();
       // finally changing the loader status
       setLoaderStatus(false);
+      props.history.push('/students')
     }
   };
 

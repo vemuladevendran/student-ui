@@ -1,6 +1,6 @@
 {
-  "short_name": "PEC",
-  "name": "Pec Student DataBase",
+  "short_name": "PDB",
+  "name": "Student DataBase",
   "icons": [
     {
       "src": "favicon.png",
@@ -18,7 +18,34 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "shortcuts": [
+    {
+      "name": "Add Student",
+      "short_name": "Add Student",
+      "description": "you can add atudent",
+      "url": "/students/add-student",
+      "icons": [
+        {
+          "src": "/assets/addstudent.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "short_name": "Profile",
+      "description": "See Your Profile",
+      "url": "/profile",
+      "icons": [
+        {
+          "src": "/assets/profile-icon.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

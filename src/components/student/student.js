@@ -13,8 +13,10 @@ import * as studentServe from "../../service/http/student";
 import * as reportServe from "../../service/http/report";
 import * as circularServe from "../../service/http/circular";
 import CommonAlert from "../../common-models/common-alert/nodatafound-alert";
+import Loader from "../loader/loader";
 
 function Students(props) {
+  const [loader, setLoaderStatus] = useState(false);
   const [ErrorDialog, setErrorDialog] = useState(true);
   const [branches, setBranches] = useState();
   const [isAdmin, setIsAdmin] = useState();
@@ -47,12 +49,16 @@ function Students(props) {
   const getStudentsDetails = async () => {
     try {
       if (filter.branch === "" && filter.currentStudingYear === "") {
+        setLoaderStatus(true);
         const students = await studentServe.getStudents();
+        setLoaderStatus(false);
         setStudents(students.data);
         console.log(students.data);
         return;
       }
+      setLoaderStatus(true);
       const students = await studentServe.getStudents(filter);
+      setLoaderStatus(false);
       setStudents(students.data);
       console.log(students.data);
     } catch (error) {
@@ -161,6 +167,8 @@ function Students(props) {
   return (
     <>
       <div className="container-fluid">
+        {/* loader */}
+        {loader === true ? <Loader></Loader> : null}
         <div className="row">
           {/* student list */}
           <div className="col-12 col-lg-9">
