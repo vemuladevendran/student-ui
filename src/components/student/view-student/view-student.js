@@ -80,7 +80,7 @@ function ViewStudent(props) {
   const share = () => {
     if (navigator.share) {
       navigator
-        .share({
+        .canShare({
           url: window.location.href,
           file: student?.photo || "/assets/default-profile.png",
           title: `Student Data`,
