@@ -30,7 +30,7 @@ function ViewCircularReports(props) {
                             <p className="mx-3">Data <span className="fw-bold">{dateFormat(dialoData?.reportDate || dialoData?.circularDate, 'mmm d, yyyy')}</span></p>
                             <p className="mx-3">Created By <span className="fw-bold">{dialoData?.createdBy}</span></p>
                         </div>
-                        <p>{dialoData?.reportContent || dialoData?.circularContent}</p>
+                        <p className="row">{dialoData?.reportContent || dialoData?.circularContent}</p>
 
                         <div className="mt-3 d-flex justify-content-center">
                             <button className="btn btn-primary px-4" onClick={props.closeModal}>Close</button>

@@ -390,6 +390,7 @@ function AddEditStudent(props) {
                 label="10th marks percentage"
                 onChange={handleFormvaluechange}
                 name="markPercentageOf10"
+                step="0.01"
                 value={formValues?.markPercentageOf10}
                 variant="outlined"
                 className="w-100 my-3"
@@ -404,6 +405,7 @@ function AddEditStudent(props) {
                 label="12th marks percentage"
                 onChange={handleFormvaluechange}
                 name="markPercentageOf12"
+                step="0.01"
                 value={formValues?.markPercentageOf12}
                 variant="outlined"
                 className="w-100 my-3"
