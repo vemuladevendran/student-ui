@@ -86,7 +86,6 @@ function AddMarks(props) {
                     label="Enter marks"
                     variant="outlined"
                     className="w-100 my-3"
-                    required
                   />
                 </div>
               );

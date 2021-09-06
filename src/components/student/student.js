@@ -238,6 +238,7 @@ function Students(props) {
                 </FormControl>
               </div>
             </div>
+            <p className="fw-bold">Total Number Of Students : {students?.length}</p>
             <hr></hr>
             {/* students cards */}
             <div className="row justify-content-center  justify-content-md-start">
