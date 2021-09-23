@@ -53,7 +53,6 @@ function Students(props) {
         const students = await studentServe.getStudents();
         setLoaderStatus(false);
         setStudents(students.data);
-        console.log(students.data);
         return;
       }
       setLoaderStatus(true);
@@ -83,6 +82,7 @@ function Students(props) {
     try {
       const data = await reportServe.getReports();
       setReports(data.data);
+      console.log(data.data);
     } catch (error) {
       console.log(error);
     }
@@ -92,7 +92,6 @@ function Students(props) {
   const openCircularDialog = (id) => {
     setViewCircularReport(true);
     const data = circular.find((x) => {
-      console.log(id);
       if (x.id === id) {
         return x;
       }
@@ -104,7 +103,6 @@ function Students(props) {
   const openReportDialog = (id) => {
     setViewCircularReport(true);
     const data = reports.find((x) => {
-      console.log(id);
       if (x.id === id) {
         return x;
       }
@@ -142,6 +140,35 @@ function Students(props) {
       try {
         await studentServe.deleteStudent(id);
         getStudentsDetails();
+      } catch (error) {
+        console.log(error, "fail to delete");
+      }
+    }
+  };
+
+  // delete report and circular
+
+  const deleteReportCircular = async (event, id, name) => {
+    event.stopPropagation();
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        if (name === "report") {
+          await reportServe.deleteReport(id);
+          getReports();
+          return;
+        }
+        await circularServe.deleteCircular(id);
+        getCirculars();
       } catch (error) {
         console.log(error, "fail to delete");
       }
@@ -238,7 +265,9 @@ function Students(props) {
                 </FormControl>
               </div>
             </div>
-            <p className="fw-bold">Total Number Of Students : {students?.length}</p>
+            <p className="fw-bold">
+              Total Number Of Students : {students?.length}
+            </p>
             <hr></hr>
             {/* students cards */}
             <div className="row justify-content-center  justify-content-md-start">
@@ -318,7 +347,21 @@ function Students(props) {
                       openCircularDialog(x.id);
                     }}
                   >
-                    <h4>{x.circularTitle}</h4>
+                    <h5 className="fw-bold text-uppercase">
+                      {x.circularTitle}
+                      {isAdmin === "true" ? (
+                        <button
+                          type="button"
+                          className="btn"
+                          title="delete Circular"
+                          onClick={($event) => {
+                            deleteReportCircular($event, x?.id, "circular");
+                          }}
+                        >
+                          <i className="bi bi-trash-fill text-danger"></i>
+                        </button>
+                      ) : null}
+                    </h5>
                     <p className={`${ss.report_content}`}>
                       {x.circularContent.slice(0, 55)}
                     </p>
@@ -344,7 +387,24 @@ function Students(props) {
                       openReportDialog(x.id);
                     }}
                   >
-                    <h3>{x.reportTitle}</h3>
+                    <p className="fw-bold text-primary">
+                      {x.studentRollNumber}
+                    </p>
+                    <h5 className="fw-bold text-uppercase">
+                      {x.reportTitle}{" "}
+                      {isAdmin === "true" ? (
+                        <button
+                          type="button"
+                          className="btn"
+                          title="Delete Reports"
+                          onClick={($event) => {
+                            deleteReportCircular($event, x?.id, "report");
+                          }}
+                        >
+                          <i className="bi bi-trash-fill text-danger"></i>
+                        </button>
+                      ) : null}
+                    </h5>
                     <p className={`${ss.report_content}`}>
                       {x.reportContent.slice(0, 55)}
                     </p>

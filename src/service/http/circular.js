@@ -10,3 +10,8 @@ export const getCirculars = () => {
 export const createCirculars = (data, queryDetails) => {
   return axios.post(`${urlPort}/circular`, data, { params: queryDetails });
 };
+
+
+export const deleteCircular = (id) => {
+  return axios.delete(`${urlPort}/circular/${id}`);
+};

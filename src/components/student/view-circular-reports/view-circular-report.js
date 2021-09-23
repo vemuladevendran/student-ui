@@ -24,7 +24,7 @@ function ViewCircularReports(props) {
                     <div className="col-12">
                         <div className="mb-3">
                             <span className="fw-bold h4 text-center m-0">{dialoData?.reportTitle || dialoData?.circularTitle}</span>
-                            <span className="me-3">( {dialoData?.studentRollNumber || (`${dialoData?.circularFor} Departement`)})</span>
+                            <span className="me-3 fw-bold text-uppercase text-primary"> {dialoData?.studentRollNumber || `${dialoData?.circularFor} Departement`}</span>
                         </div>
                         <div className="d-flex justify-content-between">
                             <p className="mx-3">Data <span className="fw-bold">{dateFormat(dialoData?.reportDate || dialoData?.circularDate, 'mmm d, yyyy')}</span></p>
