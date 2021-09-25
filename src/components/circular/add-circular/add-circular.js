@@ -5,14 +5,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import { FormControl } from '@material-ui/core';
-import Loader from '../loader/loader';
+import Loader from '../../loader/loader';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
-import departments from '../../service/departement/branches';
-import TokenServe from '../../service/token/token';
-import * as circularServe from '../../service/http/circular';
+import departments from '../../../service/departement/branches';
+import TokenServe from '../../../service/token/token';
+import * as circularServe from '../../../service/http/circular';
 
 function AddCircular(props) {
     const [errorMessage, setErrorMessage] = useState('');

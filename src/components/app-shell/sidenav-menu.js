@@ -7,6 +7,7 @@ export const menuItems = [
     ['dashboard', 'Users', '/users', 'admin'],
     ['group_add', 'Add User', '/users/add-user', 'admin'],
     ['list', 'Marks', '/marks', 'all'],
+    ['ballot', 'Circular', '/circulars', 'all'],
     ['assignment', 'Create Circular', '/add-circular', 'all'],
     ['bug_report', 'Create Report', '/create-report/new', 'all'],
     ['phonelink_lock', 'Update Password', '/update-password', 'all'],

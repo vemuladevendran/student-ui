@@ -25,13 +25,14 @@ import AddEditStudent from "../student/add-edit-student/add-edit-student";
 import ViewStudent from "../student/view-student/view-student";
 import Users from "../users/user";
 import AddUser from "../users/add-user/add-user";
-import AddCircular from "../circular/add-circular";
+import AddCircular from "../circular/add-circular/add-circular";
 import CreateReport from "../report/create-report";
 import UpdatePassword from "../update-password/update-password";
 import Profile from "../profile/profile";
 import DepartmentSelectionForm from "../marks/department-selection-form/department-selection-form";
 import StudentListMarks from "../marks/student-list/student-list-mark";
 import Marks from "../marks/marks";
+import Circular from "../circular/circular";
 
 const drawerWidth = 240;
 
@@ -290,6 +291,9 @@ function ResponsiveDrawer(props) {
           </Route>
           <Route exact path="/marks">
             <Marks></Marks>
+          </Route>
+          <Route exact path="/circulars">
+            <Circular></Circular>
           </Route>
           <Route exact path="/marks-department-selection">
             <DepartmentSelectionForm></DepartmentSelectionForm>
