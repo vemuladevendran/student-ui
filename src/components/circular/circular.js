@@ -38,7 +38,6 @@ function Circular(props) {
       setLoaderStatus(false);
       setCircularList(data?.data);
       setLoaderStatus(false);
-      console.log(data.data);
     } catch (error) {
       //  showing error message
       const errorMessage = error?.response.data.message;

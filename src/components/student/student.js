@@ -59,7 +59,6 @@ function Students(props) {
       const students = await studentServe.getStudents(filter);
       setLoaderStatus(false);
       setStudents(students.data);
-      console.log(students.data);
     } catch (error) {
       console.error(error);
     }
@@ -82,7 +81,6 @@ function Students(props) {
     try {
       const data = await reportServe.getReports();
       setReports(data.data);
-      console.log(data.data);
     } catch (error) {
       console.log(error);
     }
