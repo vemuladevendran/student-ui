@@ -169,6 +169,14 @@ function ResponsiveDrawer(props) {
           return null;
         })}
       </List>
+      <div className="position-fixed bottom-0 ms-5">
+        <p className="fw-bold" style={{ color: "#2465c3" }}>
+          Design And Developed
+        </p>
+        <p className="fw-bold text-center" style={{ color: "#2465c3" }}>
+          By Devendran
+        </p>
+      </div>
     </div>
   );
 
@@ -212,6 +220,17 @@ function ResponsiveDrawer(props) {
                   >
                     Update Password
                   </NavLink>
+                </div>
+              </li>
+              <li>
+                <div className="dropdown-item my-2 text-center">
+                  <a
+                    className="text-decoration-none"
+                    href="https://play.google.com/store/apps/details?id=io.devendran.student"
+                    target="_blank" rel="noreferrer"
+                  >
+                    Visit Student Portal
+                  </a>
                 </div>
               </li>
               <li>

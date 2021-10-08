@@ -48,7 +48,6 @@ function ViewStudent(props) {
       setLoaderStatus(true);
       const studentId = props?.match?.params?.id;
       const student = await studentServe.getStudentById(studentId);
-      console.log(student.data);
       setStudent(student.data);
       setLoaderStatus(false);
     } catch (error) {
