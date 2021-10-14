@@ -1,7 +1,7 @@
 import { Dialog } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { useEffect, useState } from "react";
-
+import TokenServe from "../../../service/token/token"
 import * as marksServe from "../../../service/http/marks";
 function AddMarks(props) {
 
@@ -22,7 +22,13 @@ function AddMarks(props) {
   const handleFormSubmit = async (event) => {
     try {
       event.preventDefault();
-      await marksServe.createMarks(formValues);
+      const token = TokenServe.getToken();
+      const payload = TokenServe.getTokenPayloadData(token);
+      const userId = payload.id;
+      const params = {
+        id: userId,
+      };
+      await marksServe.createMarks(formValues, params);
       props.closeModal();
       props.successMessage();
     } catch (error) {

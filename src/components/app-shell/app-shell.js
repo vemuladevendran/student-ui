@@ -227,7 +227,8 @@ function ResponsiveDrawer(props) {
                   <a
                     className="text-decoration-none"
                     href="https://play.google.com/store/apps/details?id=io.devendran.student"
-                    target="_blank" rel="noreferrer"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     Visit Student Portal
                   </a>
