@@ -326,8 +326,8 @@ function Students(props) {
               })}
             </div>
           </div>
-          {/* graph */}
-          <div className="col-12 col-lg-3 d-none d-lg-block vh-100 border-start">
+          {/* circulars reports */}
+          <div className="col-12 col-lg-3 d-none d-lg-block vh-100 border-start position-fixed end-0">
             {/* circular list */}
             <div className="overflow-auto h-50">
               <h4 className="fw-bold">CIRCULARS</h4>
