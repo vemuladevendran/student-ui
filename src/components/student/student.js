@@ -272,13 +272,14 @@ function Students(props) {
               {students?.map((x, i) => {
                 return (
                   <div key={i} className="card m-1" style={{ width: "17rem" }}>
-                    <div style={{ maxHeight: "21rem", minHeight: "18.5rem" }}>
+                    <div className="text-center" style={{ maxHeight: "21rem", minHeight: "18.5rem" }}>
                       <img
                         src={x?.photo || "/assets/default-profile.png"}
-                        className="card-img-top mw-100 mh-100"
+                        className="card-img-top"
                         loading="lazy"
                         decoding="async"
                         alt="..."
+                        style={{maxHeight: '230px', maxWidth: '230px'}}
                       />
                     </div>
                     <div className="card-body">

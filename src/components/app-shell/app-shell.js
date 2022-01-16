@@ -33,6 +33,7 @@ import DepartmentSelectionForm from "../marks/department-selection-form/departme
 import StudentListMarks from "../marks/student-list/student-list-mark";
 import Marks from "../marks/marks";
 import Circular from "../circular/circular";
+import CreateAnnouncements from "../announcements/create-announcements";
 
 const drawerWidth = 240;
 
@@ -167,10 +168,17 @@ function ResponsiveDrawer(props) {
           }
 
           return null;
-        })}
-      </List>
-      <div className="position-fixed bottom-0 ms-5">
+        })} <div className="position-fixed bottom-0 ms-5">
         <p className="fw-bold" style={{ color: "#2465c3" }}>
+          Design And Developed
+        </p>
+        <p className="fw-bold text-center" style={{ color: "#2465c3" }}>
+          By Devendran
+        </p>
+      </div>
+      </List>
+      <div className="position-fixed bottom-0 bg-white" style={{width: '240px'}}>
+        <p className="fw-bold text-center" style={{ color: "#2465c3" }}>
           Design And Developed
         </p>
         <p className="fw-bold text-center" style={{ color: "#2465c3" }}>
@@ -333,6 +341,9 @@ function ResponsiveDrawer(props) {
               <Route exact path="/users/add-user">
                 <AddUser></AddUser>
               </Route>
+              {/* <Route exact path="/announcement">
+                <CreateAnnouncements></CreateAnnouncements>
+              </Route> */}
             </>
           ) : null}
 

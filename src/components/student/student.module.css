@@ -8,3 +8,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.profile_photo {
+    border: 10px solid #70b0ed;
+}

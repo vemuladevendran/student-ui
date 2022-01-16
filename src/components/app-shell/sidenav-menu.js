@@ -1,11 +1,10 @@
 
-
-
 export const menuItems = [
     ['dashboard', 'Students', '/students', 'all'],
     ['person_add', 'Add Student', '/students/add-student', 'all'],
     ['dashboard', 'Users', '/users', 'admin'],
     ['group_add', 'Add User', '/users/add-user', 'admin'],
+    // ['campaign', 'Create Announcement', '/announcement', 'admin'],
     ['list', 'Marks', '/marks', 'all'],
     ['ballot', 'Circular', '/circulars', 'all'],
     ['assignment', 'Create Circular', '/add-circular', 'all'],
