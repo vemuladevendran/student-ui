@@ -58,7 +58,7 @@ function ViewStudent(props) {
       openSnackbar();
       // finally changing the loader status
       setLoaderStatus(false);
-      props.history.push('/students')
+      props.history.push("/students");
     }
   };
 
@@ -77,16 +77,14 @@ function ViewStudent(props) {
   }, []);
 
   const share = () => {
-    if (navigator.share) {
-      navigator
-        .canShare({
-          url: window.location.href,
-          file: student?.photo || "/assets/default-profile.png",
-          title: `Student Data`,
-          text: `${student?.firstName} personal data`,
-        })
-        .catch(() => console.warn("Failed to share"));
-    }
+    navigator
+      .share({
+        url: window.location.href,
+        file: student?.photo || "/assets/default-profile.png",
+        title: `Student Data`,
+        text: `${student?.firstName} personal data`,
+      })
+      .catch(() => console.warn("Failed to share"));
   };
 
   return (
@@ -145,11 +143,9 @@ function ViewStudent(props) {
                 className="w-100"
                 loading="lazy"
                 decoding="async"
-                style = {
-                  {
-                    maxHeight: '21rem'
-                  }
-                }
+                style={{
+                  maxHeight: "21rem",
+                }}
               />
             </div>
             {/* lastupdate details */}

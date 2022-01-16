@@ -7,6 +7,7 @@ import AppShell from './components/app-shell/app-shell'
 import { init } from './service/auth/auth-token';
 import { useState } from 'react';
 import TokenServe from './service/token/token'
+import '../node_modules/share-api-polyfill/dist/share-min.js'
 init();
 
 
